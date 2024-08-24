@@ -4,7 +4,7 @@ import { WebhookEvent } from '@clerk/nextjs/server'
 import prisma from '@/lib/client'
 
 export async function POST(req: Request) {
-  console.log("Webhook received"); // Log when the request is received
+  console.log("Webhook received");
 
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
   if (!WEBHOOK_SECRET) {
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
   try {
     const payload = await req.json();
-    console.log("Parsed payload:", payload); // Log parsed payload
+    console.log("Parsed payload:", payload);
 
     const body = JSON.stringify(payload);
     const wh = new Webhook(WEBHOOK_SECRET);
@@ -40,40 +40,47 @@ export async function POST(req: Request) {
 
     console.log("Webhook event:", evt);
 
-    if (evt.type === "user.created" || evt.type === "user.updated") {
-      const { id } = evt.data;
-      const username = payload.data.username;
+    const { id } = evt.data;
+    const username = payload.data.username;
 
-      // Ensure values exist
-      console.log("Event ID and username:", { id, username });
-
-      if (!id || !username) {
-        throw new Error("ID or username is missing in the payload");
-      }
-
-      if (evt.type === "user.created") {
-        await prisma.user.create({
-          data: {
-            id,
-            username,
-            avatar: payload.data.image_url || "/noavatar.png",
-            cover: "/pawcover2.png",
-          },
-        });
-      } else if (evt.type === "user.updated") {
-        await prisma.user.update({
-          where: { id },
-          data: {
-            username,
-            avatar: payload.data.image_url || "/noavatar.png",
-            cover: "/pawcover2.png",
-          },
-        });
-      }
-      return new Response("Success", { status: 200 });
+    if (!id || !username) {
+      throw new Error("ID or username is missing in the payload");
     }
-  } catch (error) {
+
+    if (evt.type === "user.created") {
+      await prisma.user.create({
+        data: {
+          id,
+          username,
+          avatar: payload.data.image_url || "/noavatar.png",
+          cover: "/pawcover2.png",
+        },
+      });
+    } else if (evt.type === "user.updated") {
+      await prisma.user.update({
+        where: { id },
+        data: {
+          username,
+          avatar: payload.data.image_url || "/noavatar.png",
+          cover: "/pawcover2.png",
+        },
+      });
+    }
+
+    console.log("Database operation successful");
+
+    return new Response("Success", { status: 200 });
+  } catch (error: any) {  // Typen er angivet som 'any' for at sikre, at vi kan tilgå properties sikkert
     console.error("Error in webhook handler:", error); // Log detailed error
-    return new Response('Error occurred', { status: 500 });
+
+    const errorMessage = error?.message || 'An unknown error occurred'; // Tjek om 'message' eksisterer
+
+    if (error instanceof SyntaxError) {
+      return new Response('Invalid JSON payload', { status: 400 });
+    } else if (errorMessage.includes("ID or username is missing")) {
+      return new Response(errorMessage, { status: 400 });
+    } else {
+      return new Response('Internal Server Error: ' + errorMessage, { status: 500 });
+    }
   }
 }
