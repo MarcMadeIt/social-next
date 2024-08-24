@@ -8,7 +8,8 @@ export async function POST(req: Request) {
 
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
   if (!WEBHOOK_SECRET) {
-    throw new Error('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local');
+    console.error('WEBHOOK_SECRET is not defined');
+    return new Response('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local', { status: 500 });
   }
 
   const headerPayload = headers();
@@ -19,9 +20,8 @@ export async function POST(req: Request) {
   console.log("Svix headers:", { svix_id, svix_timestamp, svix_signature });
 
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response('Error occurred -- no svix headers', {
-      status: 400,
-    });
+    console.error('Missing Svix headers');
+    return new Response('Error occurred -- no svix headers', { status: 400 });
   }
 
   try {
@@ -44,6 +44,7 @@ export async function POST(req: Request) {
     const username = payload.data.username;
 
     if (!id || !username) {
+      console.error("ID or username is missing in the payload");
       throw new Error("ID or username is missing in the payload");
     }
 
@@ -70,10 +71,10 @@ export async function POST(req: Request) {
     console.log("Database operation successful");
 
     return new Response("Success", { status: 200 });
-  } catch (error: any) {  // Typen er angivet som 'any' for at sikre, at vi kan tilgå properties sikkert
-    console.error("Error in webhook handler:", error); // Log detailed error
+  } catch (error: any) {
+    console.error("Error in webhook handler:", error);
 
-    const errorMessage = error?.message || 'An unknown error occurred'; // Tjek om 'message' eksisterer
+    const errorMessage = error?.message || 'An unknown error occurred';
 
     if (error instanceof SyntaxError) {
       return new Response('Invalid JSON payload', { status: 400 });
