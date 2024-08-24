@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    div,
+    body {
+        @apply font-sans;
+        letter-spacing: .4px;
+        font-weight: 300;
+    }
+}
+
+
+:root {
+    --background: #131313;
+    --foreground: #171717;
+    --text: #ADF9EA;
+    --primary: #2dd4bf;
+    --secondary: #0d9488;
+    --placeholder: #115e59;
+    --extra: #14b8a6;
+    --shadow: #171717;
+    --user: #042f2e;
+    /* alternative #f0fdfa
+    
+/* 
+    --background: #131313;
+    --foreground: #171717;
+    --text: #f5d0fe;
+    --primary: #f472b6;
+    --secondary: #9d174d;
+    --placeholder: #500724;
+    --extra: #f472b6;
+    --shadow: #171717;
+    --user: #042f2e; */
+}
+
+body {
+    background-color: var(--background);
+    color: var(--secondary);
+}
+
+.active {
+    border-bottom: 1px solid var(--primary);
+}
+
+
+.label-post {
+    cursor: pointer;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.text13 {
+    font-size: 13px;
+}
+
+.text12 {
+    font-size: 12px;
+}
+
+.text11 {
+    font-size: 11px;
+}
+
+.text10 {
+    font-size: 11px;
+}
+
+.btn {
+    border: 2px solid var(--extra);
+    background: transparent;
+    color: var(--primary);
+    font-size: 14px;
+    outline: none;
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 500ms;
+}
+
+.btn:hover {
+
+    transition: all 500ms;
+    border: 2px solid var(--placeholder);
+}
+
+.btn-cta {
+    border: 3px solid transparent;
+    background-color: var(--primary);
+    color: var(--background);
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    padding: 4px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 500ms;
+}
+
+.btn-cta:hover {
+    background-color: var(--extra);
+    transition: all 500ms;
+    border: 3px solid var(--extra);
+}
+
+.btn-cta:active {
+    background-color: var(--secondary);
+    transition: all 500ms;
+    border: 3px solid var(--primary);
+}
+
+.btn-cta-light {
+    border: 3px solid transparent;
+    background: var(--primary);
+    color: var(--background);
+    font-size: 12px;
+    outline: none;
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 500ms;
+}
+
+.btn-cta-light:hover {
+    background-color: var(--secondary);
+    transition: all 500ms;
+    border: 3px solid var(--secondary);
+}
+
+.btn-cta-light:active {
+    background-color: var(--secondary);
+    transition: all 500ms;
+    border: 3px solid var(--primary);
+}
+
+.btn-pending {
+    background-color: transparent;
+    color: var(--primary);
+    border: 3px solid transparent;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    padding: 4px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 500ms;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
