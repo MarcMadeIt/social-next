@@ -108,7 +108,6 @@ const ProfilePage = async ({ params }: { params: { username: string }}) => {
                   />
                   </div>
               </div>
-              <hr className='h-0 border-2 border-extra w-[90%] rounded-lg ' />
               <div className="flex flex-col justify-center items-center mt-10 gap-4 h-[40%]">
                 <span className="flex flex-col justify-center items-center text-primary text-xl font-semibold">
                   {user.firstname}
