@@ -96,17 +96,19 @@ const ProfilePage = async ({ params }: { params: { username: string }}) => {
         </div>
         <div className="w-full md:w-[70%] xl:w-[50%] h-80">
           <div className="flex flex-col gap-6">
-            <div className="py-5 flex flex-col gap-5 bg-foreground rounded-xl shadow-xl text13">
+            <div className="py-5 flex flex-col items-center gap-5 bg-foreground rounded-xl shadow-xl text13">
               <div className="relative w-full h-48 md:h-64 ">
                 <Image src={user.cover || "/pawcover.png"} alt="" fill className="object-contain rounded-lg" sizes="100vw" />
+                <div className='w-36 h-36 relative left-0 right-0 m-auto -bottom-28'>
                 <Image
                   src={user.avatar || "/noavatar.png"}
                   alt=""
-                  width={150}
-                  height={150}
-                  className="object-cover rounded-[25%] absolute left-0 right-0 m-auto -bottom-10 ring-8 ring-foreground z-10"
-                />
+                  fill
+                  className="object-cover rounded-[25%] ring-8 ring-foreground z-10"
+                  />
+                  </div>
               </div>
+              <hr className='h-0 border-2 border-extra w-[90%] rounded-lg ' />
               <div className="flex flex-col justify-center items-center mt-10 gap-4 h-[40%]">
                 <span className="flex flex-col justify-center items-center text-primary text-xl font-semibold">
                   {user.firstname}

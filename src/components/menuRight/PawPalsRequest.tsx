@@ -1,24 +1,27 @@
 import prisma from '@/lib/client'
 import { auth } from '@clerk/nextjs/server'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import PawPalsRequestList from './PawPalsRequestList'
 
 const PawPalsRequest = async () => {
-  const{userId} = auth()
+  const { userId } = auth();
+
+  console.log("Current User ID:", userId);
 
   if (!userId) return null;
 
-  const requests = await prisma.followerRequest.findMany ({
+  const requests = await prisma.followerRequest.findMany({
     where: {
-      receiverId: userId, 
-    }, 
+      receiverId: userId,
+    },
     include: {
       sender: true,
     },
   });
-
+  
+  console.log("Requests:", requests);
+  
 
   if (requests.length === 0) return null; 
 
