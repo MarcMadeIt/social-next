@@ -1,7 +1,5 @@
 "use client"
 
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa6'
 

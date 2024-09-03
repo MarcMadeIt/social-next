@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import MobileMenu from './MobileMenu'
-import { FaBuffer, FaCat, FaCircleUser, FaComments, FaHouse, FaRegCalendarDays, FaSearchengin, FaSquarePlus } from 'react-icons/fa6'
-import { ClerkLoaded, ClerkLoading, RedirectToOrganizationProfile, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { FaCat, FaComments, FaHouse, FaRegCalendarDays, FaSearchengin, FaSquarePlus } from 'react-icons/fa6'
+import { ClerkLoaded, ClerkLoading, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { FaUser } from 'react-icons/fa'
 import OptionsModal from './OptionsModal'
 import { useState } from 'react'
