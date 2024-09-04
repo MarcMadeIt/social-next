@@ -28,12 +28,11 @@ const ProfileCard = async () => {
 
 
   return (
-    <div className='p-2 flex flex-col gap-5 bg-foreground rounded-xl shadow-xl text13 h-60'>
-        <div className="relative h-[60%]">
-            <Image src={user.cover || "/pawcover.png"} alt='' fill className='object-cover rounded-lg' />
-            <Image src={user.avatar || "/noavatar.png"} alt='' width={80} height={80} className="object-cover rounded-[25%] absolute left-0 right-0 m-auto -bottom-10 ring-8 ring-foreground z-10"/>
+    <div className='p-2 flex flex-col justify-center gap-5 bg-foreground rounded-xl shadow-xl text13 h-40'>
+        <div className="relative">
+            <Image src={user.avatar || "/noavatar.png"} alt='' width={80} height={80} className="object-cover rounded-[25%] m-auto -bottom-10 ring-8 ring-foreground z-10"/>
         </div>
-            <div className='h-[40%] flex items-center justify-center'>
+            <div className='flex items-center justify-center'>
             <Link href={`/profile/${user.username}`} className='btn-cta-light'>My Profile</Link>
         
         </div>

@@ -97,7 +97,7 @@ const ProfilePage = async ({ params }: { params: { username: string }}) => {
         <div className="w-full md:w-[70%] xl:w-[50%] h-80">
           <div className="flex flex-col gap-6">
             <div className="py-5 flex flex-col items-center gap-5 bg-foreground rounded-xl shadow-xl text13">
-              <div className="relative w-full h-48 md:h-64 ">
+              <div className="relative w-full h-48 md:h-56 ">
                 <Image src={user.cover || "/pawcover.png"} alt="" fill className="object-contain rounded-lg" sizes="100vw" />
                 <div className='w-36 h-36 relative left-0 right-0 m-auto -bottom-28'>
                 <Image
@@ -139,7 +139,7 @@ const ProfilePage = async ({ params }: { params: { username: string }}) => {
                       +
                     </span>
                   </div>
-                  <span className="text-extra font-medium z-10">{user._count.Followers} Amigos</span>
+                  <span className="text-extra font-medium z-10">{user._count.Followers} PawPals</span>
                 </div>
               </div>
               {currentUserId !== user.id && (

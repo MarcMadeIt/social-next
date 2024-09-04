@@ -24,7 +24,7 @@ const UserInfoCard = ({user}:{user: User}) => {
             
         <div className='flex justify-between text-primary text12'>
             <span className='text-secondary text-sm'>User information</span>
-            {currentUserId === user.id ? (<UpdateUser />) : (<Link href="/"> <span className='font-medium text-secondary'>See all</span></Link>)}
+            {currentUserId === user.id ? (<UpdateUser user={user} />) : (<Link href="/"> <span className='font-medium text-secondary'>See all</span></Link>)}
         </div>
             {/* Names & Usernames */}
         <div className='flex flex-col gap-5'>
