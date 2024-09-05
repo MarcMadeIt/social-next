@@ -2,8 +2,9 @@
 import { FaCircleCheck, FaRegCircleXmark } from 'react-icons/fa6'
 import React, { useOptimistic, useState } from 'react'
 import Image from 'next/image'
-import { FollowerRequest, User } from '@prisma/client'
+
 import { acceptFollowRequest, declineFollowRequest } from '@/lib/actions'
+import { FollowerRequest, User } from '../../../prisma/generated/client'
 
 type RequestsWithUser = FollowerRequest & {
     sender: User

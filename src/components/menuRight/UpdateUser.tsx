@@ -1,7 +1,8 @@
 "use client"
 
-import { User } from '@prisma/client'
+
 import React, { useState } from 'react'
+import { User } from '../../../prisma/generated/client';
 
 const UpdateUser = ({user}:{user: User}) => {
   const [open, setOpen] = useState(false);
