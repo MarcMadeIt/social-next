@@ -4,7 +4,8 @@ import Birthdays from './Birthdays'
 import Ads from './Ads'
 import UserInfoCard from './UserInfoCard'
 import UserMediaCard from './UserMediaCard'
-import { User } from '@prisma/client'
+import { User } from '../../../prisma/generated/client'
+
 
 const MenuRight = ({user}:{user?: User}) => {
   return (
