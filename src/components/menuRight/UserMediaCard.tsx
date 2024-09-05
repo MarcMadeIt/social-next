@@ -1,8 +1,8 @@
 import prisma from '@/lib/client'
-import { User } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { User } from '../../../prisma/generated/client'
 
 const UserMediaCard = async ({user}:{user: User}) => {
     const postsWithMedia = await prisma.post.findMany ({

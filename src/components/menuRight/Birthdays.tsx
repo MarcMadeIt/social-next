@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { LuPartyPopper } from 'react-icons/lu'
-import { MdCelebration } from 'react-icons/md'
 
 const Birthdays = () => {
   return (
