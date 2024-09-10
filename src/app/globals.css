@@ -23,15 +23,18 @@
 
 
 :root {
+    --dark: #0f0f0f;
     --background: #131313;
     --foreground: #171717;
     --text: #ADF9EA;
     --primary: #2dd4bf;
     --secondary: #0d9488;
+    --fade: #0f766e;
     --placeholder: #115e59;
     --extra: #14b8a6;
-    --shadow: #171717;
+    --shadow: #222222;
     --user: #042f2e;
+    --hover: #1a1a1a;
     /* alternative #f0fdfa
     
 /* 
@@ -71,8 +74,8 @@ body {
     /* Firefox */
 }
 
-.text13 {
-    font-size: 13px;
+.text14 {
+    font-size: 14px;
 }
 
 .text12 {

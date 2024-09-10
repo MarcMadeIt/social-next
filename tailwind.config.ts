@@ -20,7 +20,10 @@ const config: Config = {
         placeholder:"var(--placeholder)",
         shadow:"var(--shadow)",
         extra:"var(--extra)",
-        user:"var(--user)"
+        user:"var(--user)",
+        dark:"var(--dark)",
+        fade: "var(--fade)",
+        hover: "var(--hover)"
       },
       fontFamily: {
         sans: ["Kanit", "sans-serif"],
