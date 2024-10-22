@@ -14,14 +14,17 @@
     "@clerk/nextjs": "^5.2.3",
     "@clerk/themes": "^2.1.10",
     "@prisma/client": "^5.18.0",
+    "cloudinary": "^2.5.1",
     "next": "^14.2.8",
+    "next-cloudinary": "^6.16.0",
     "nextjs": "^0.0.3",
     "prisma": "^5.19.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
     "styled-jsx": "^5.1.6",
-    "svix": "^1.28.0"
+    "svix": "^1.28.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/estree": "^1.0.5",

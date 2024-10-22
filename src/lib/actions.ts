@@ -1,6 +1,7 @@
 "use server"
 
 import { auth } from "@clerk/nextjs/server"
+import { z } from "zod";
 import prisma from "./client";
 
 export const switchFollow = async (userId: string) => {
@@ -165,3 +166,64 @@ export const declineFollowRequest = async (userId:string)=> {
         throw new Error("something went wrong")
     }
 }
+
+
+export const updateProfile = async (formData: FormData, cover: string) => {
+
+  const fields = Object.fromEntries(formData);
+  
+  fields["cover"] = cover;
+
+
+  const filteredFields = Object.fromEntries(
+    Object.entries(fields).filter(([_, value]) => value !== "")
+  );
+
+  console.log("Filtered Fields:", filteredFields);
+
+
+  const ProfileSchema = z.object({
+    cover: z.string().optional(),
+    firstname: z.string().max(60).optional(),
+    surname: z.string().max(60).optional(),
+    owner: z.string().max(60).optional(),
+    desc: z.string().max(360).optional(),
+    city: z.string().max(60).optional(),
+    country: z.string().max(60).optional(),
+    race: z.string().max(60).optional(),
+    color: z.string().max(60).optional(),
+  });
+
+  // Valider `filteredFields` ved hjælp af Zod
+  const validatedFields = ProfileSchema.safeParse(filteredFields);
+
+  if (!validatedFields.success) {
+    console.log("Validation Errors:", validatedFields.error.flatten().fieldErrors);
+    return "err";
+  }
+
+  // Hent bruger-ID fra autentifikationsmekanismen
+  const { userId } = auth();
+
+  if (!userId) {
+    console.log("User not authenticated");
+    return "err";
+  }
+
+  try {
+    // Opdater brugerprofilen med de validerede felter
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        ...validatedFields.data,
+      },
+    });
+    console.log("Profile updated successfully");
+    return "success";
+  } catch (err) {
+    console.error("Update Error:", err);
+    return "err";
+  }
+};
