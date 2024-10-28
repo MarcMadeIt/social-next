@@ -168,17 +168,32 @@ const UpdateUser = ({ user }: { user: User }) => {
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                   <span className="text14 font-bold">Pet Details</span>
                   <hr className="h-0 w-full border-1 border-shadow rounded-md" />
-                  <div className="flex flex-col gap-2">
-                    <label className="block text12 font-medium text-text">
-                      Petname
-                    </label>
-                    <div className="flex justify-between items-center">
-                      <input
-                        type="text"
-                        className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md "
-                        placeholder={user.firstname || ""}
-                        name="firstname"
-                      />
+                  <div className="flex gap-5">
+                    <div className="flex flex-col gap-2">
+                      <label className="block text12 font-medium text-text">
+                        Pet name
+                      </label>
+                      <div className="flex justify-between items-center">
+                        <input
+                          type="text"
+                          className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md "
+                          placeholder={user.firstname || ""}
+                          name="firstname"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="block text12 font-medium text-text">
+                        Owner name
+                      </label>
+                      <div className="flex justify-between items-center">
+                        <input
+                          type="text"
+                          className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md "
+                          placeholder={user.owner || ""}
+                          name="owner"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="flex gap-5">
