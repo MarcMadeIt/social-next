@@ -1,7 +1,0 @@
-{
-    "build": {
-      "env": {
-        "DATABASE_URL": "mysql://gama:gama1203@141.136.35.102/gama-social"
-      }
-    }
-  }
