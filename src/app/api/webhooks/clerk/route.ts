@@ -1,87 +1,14 @@
-import { Webhook } from 'svix'
-import { headers } from 'next/headers'
-import { WebhookEvent } from '@clerk/nextjs/server'
-import prisma from '@/lib/client'
+// /api/webhooks/clerk.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import prisma from '@/lib/client';
 
-export async function POST(req: Request) {
-  console.log("Webhook received");
-
-  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
-  if (!WEBHOOK_SECRET) {
-    console.error('WEBHOOK_SECRET is not defined');
-    return new Response('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local', { status: 500 });
-  }
-
-  const headerPayload = headers();
-  const svix_id = headerPayload.get('svix-id');
-  const svix_timestamp = headerPayload.get('svix-timestamp');
-  const svix_signature = headerPayload.get('svix-signature');
-
-  console.log("Svix headers:", { svix_id, svix_timestamp, svix_signature });
-
-  if (!svix_id || !svix_timestamp || !svix_signature) {
-    console.error('Missing Svix headers');
-    return new Response('Error occurred -- no svix headers', { status: 400 });
-  }
-
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const payload = await req.json();
-    console.log("Parsed payload:", payload);
-
-    const body = JSON.stringify(payload);
-    const wh = new Webhook(WEBHOOK_SECRET);
-
-    let evt: WebhookEvent;
-    evt = wh.verify(body, {
-      'svix-id': svix_id,
-      'svix-timestamp': svix_timestamp,
-      'svix-signature': svix_signature,
-    }) as WebhookEvent;
-
-    console.log("Webhook event:", evt);
-
-    const { id } = evt.data;
-    const username = payload.data.username;
-
-    if (!id || !username) {
-      console.error("ID or username is missing in the payload");
-      throw new Error("ID or username is missing in the payload");
-    }
-
-    if (evt.type === "user.created") {
-      await prisma.user.create({
-        data: {
-          id,
-          username,
-          avatar: payload.data.image_url || "/noavatar.png",
-          cover: "/pawcover2.png",
-        },
-      });
-    } else if (evt.type === "user.updated") {
-      await prisma.user.update({
-        where: { id },
-        data: {
-          username,
-          avatar: payload.data.image_url || "/noavatar.png",
-          cover: "/pawcover2.png",
-        },
-      });
-    }
-
-    console.log("Database operation successful");
-
-    return new Response("Success", { status: 200 });
-  } catch (error: any) {
-    console.error("Error in webhook handler:", error);
-
-    const errorMessage = error?.message || 'An unknown error occurred';
-
-    if (error instanceof SyntaxError) {
-      return new Response('Invalid JSON payload', { status: 400 });
-    } else if (errorMessage.includes("ID or username is missing")) {
-      return new Response(errorMessage, { status: 400 });
-    } else {
-      return new Response('Internal Server Error: ' + errorMessage, { status: 500 });
-    }
+    // Simpelt API-kald for at teste Prisma-forbindelse
+    const users = await prisma.user.findMany();
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Prisma error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
