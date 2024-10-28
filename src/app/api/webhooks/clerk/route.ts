@@ -25,18 +25,28 @@ export async function POST(req: NextRequest) {
     const payload = await req.json();
     const body = JSON.stringify(payload);
     const wh = new Webhook(WEBHOOK_SECRET);
-    const evt = wh.verify(body, {
-      'svix-id': svix_id,
-      'svix-timestamp': svix_timestamp,
-      'svix-signature': svix_signature,
-    }) as WebhookEvent;
 
-    const { id, data: { username, image_url } } = evt.data;
+    // Prøv at verificere webhook-begivenheden og sikre struktur
+    let evt: WebhookEvent;
+    try {
+      evt = wh.verify(body, {
+        'svix-id': svix_id,
+        'svix-timestamp': svix_timestamp,
+        'svix-signature': svix_signature,
+      }) as WebhookEvent;
+    } catch (verificationError) {
+      console.error("Verification failed:", verificationError);
+      return NextResponse.json({ message: "Verification failed" }, { status: 400 });
+    }
+
+    // Bekræft strukturen af `evt.data`
+    const { id, username, image_url } = evt.data as { id: string; username: string; image_url?: string };
 
     if (!id || !username) {
       throw new Error("ID or username is missing in the payload");
     }
 
+    // Behandling afhængigt af webhookens type
     if (evt.type === "user.created") {
       await prisma.user.create({
         data: {
