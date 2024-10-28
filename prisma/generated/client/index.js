@@ -193,7 +193,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/marcmoller/Library/Mobile Documents/com~apple~CloudDocs/Documents/CODING/projects/react-projects/social-next/prisma/generated/client",
+      "value": "/Users/marcmoller/Library/Mobile Documents/com~apple~CloudDocs/Documents/CODING/Projects/react-projects/social-next/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -207,7 +207,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/marcmoller/Library/Mobile Documents/com~apple~CloudDocs/Documents/CODING/projects/react-projects/social-next/prisma/schema.prisma",
+    "sourceFilePath": "/Users/marcmoller/Library/Mobile Documents/com~apple~CloudDocs/Documents/CODING/Projects/react-projects/social-next/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
