@@ -96,12 +96,12 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         <div className="w-full md:w-[70%] xl:w-[50%] h-80">
           <div className="flex flex-col gap-6">
             <div className="py-5 flex flex-col items-center gap-5 bg-foreground rounded-xl shadow-xl text13">
-              <div className="relative w-full h-52 md:h-56 ">
+              <div className="relative w-full h-52 md:h-56  ">
                 <Image
                   src={user.cover || "/pawcover.png"}
                   alt=""
                   fill
-                  className="object-contain rounded-lg"
+                  className="object-cover rounded-lg"
                   sizes="100vw"
                 />
                 <div className="w-36 h-36 relative left-0 right-0 m-auto -bottom-28">
@@ -109,7 +109,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
                     src={user.avatar || "/noavatar.png"}
                     alt=""
                     fill
-                    className="object-cover rounded-[25%] ring-8 ring-foreground z-10"
+                    className="object-cover rounded-[25%] ring-8 ring-foreground z-10 bg-foreground"
                   />
                 </div>
               </div>

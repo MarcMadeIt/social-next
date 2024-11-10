@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { auth } from "@clerk/nextjs/server"
 import { z } from "zod";
@@ -168,62 +168,60 @@ export const declineFollowRequest = async (userId:string)=> {
 }
 
 
-export const updateProfile = async (formData: FormData, cover: string) => {
+export const updateProfile = async (
+    prevState: { success: boolean; error: boolean },
+    payload: {formData?: FormData; cover?: string}
+  ) => {
+    const {formData, cover} = payload;
+    const fields = formData ? Object.fromEntries(formData) : {};
 
-  const fields = Object.fromEntries(formData);
+    if (cover) {
+        fields.cover = cover;
+      }
   
-  fields["cover"] = cover;
-
-
-  const filteredFields = Object.fromEntries(
-    Object.entries(fields).filter(([_, value]) => value !== "")
-  );
-
-  console.log("Filtered Fields:", filteredFields);
-
-
-  const ProfileSchema = z.object({
-    cover: z.string().optional(),
-    firstname: z.string().max(60).optional(),
-    surname: z.string().max(60).optional(),
-    owner: z.string().max(60).optional(),
-    desc: z.string().max(360).optional(),
-    city: z.string().max(60).optional(),
-    country: z.string().max(60).optional(),
-    race: z.string().max(60).optional(),
-    color: z.string().max(60).optional(),
-  });
-
-  // Valider `filteredFields` ved hjælp af Zod
-  const validatedFields = ProfileSchema.safeParse(filteredFields);
-
-  if (!validatedFields.success) {
-    console.log("Validation Errors:", validatedFields.error.flatten().fieldErrors);
-    return "err";
-  }
-
-  // Hent bruger-ID fra autentifikationsmekanismen
-  const { userId } = auth();
-
-  if (!userId) {
-    console.log("User not authenticated");
-    return "err";
-  }
-
-  try {
-    // Opdater brugerprofilen med de validerede felter
-    await prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        ...validatedFields.data,
-      },
+    const filteredFields = Object.fromEntries(
+      Object.entries(fields).filter(([_, value]) => value !== "")
+    );
+  
+    console.log("Filtered Fields:", filteredFields);
+  
+    const ProfileSchema = z.object({
+      cover: z.string().optional(),
+      firstname: z.string().max(60).optional(),
+      surname: z.string().max(60).optional(),
+      owner: z.string().max(60).optional(),
+      desc: z.string().max(360).optional(),
+      city: z.string().max(60).optional(),
+      country: z.string().max(60).optional(),
+      race: z.string().max(60).optional(),
+      color: z.string().max(60).optional(),
     });
-    console.log("Profile updated successfully");
-    return "success";
-  } catch (err) {
-    console.error("Update Error:", err);
-    return "err";
-  }
-};
+  
+    // Validate `filteredFields` with Zod
+    const validatedFields = ProfileSchema.safeParse(filteredFields);
+  
+    if (!validatedFields.success) {
+      console.log("Validation Errors:", validatedFields.error.flatten().fieldErrors);
+      return { success: false, error: true };
+    }
+  
+    // Assume userId is retrieved from an auth mechanism
+    const { userId } = auth();
+  
+    if (!userId) {
+      console.log("User not authenticated");
+      return { success: false, error: true };
+    }
+  
+    try {
+      await prisma.user.update({
+        where: { id: userId },
+        data: validatedFields.data,
+      });
+      console.log("Profile updated successfully");
+      return { success: true, error: false };
+    } catch (err) {
+      console.error("Update Error:", err);
+      return { success: false, error: true };
+    }
+  };

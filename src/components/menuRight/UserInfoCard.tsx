@@ -6,7 +6,7 @@ import {
   FaLocationDot,
   FaPersonCircleCheck,
 } from "react-icons/fa6";
-import UpdateUser from "./UpdateUser";
+import UpdateUser from "./updateUser/UpdateUser";
 import { auth } from "@clerk/nextjs/server";
 import { User } from "../../../prisma/generated/client";
 
