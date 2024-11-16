@@ -2,6 +2,7 @@ import React, { useActionState } from "react";
 import { User } from "../../../../../prisma/generated/client";
 import { updateProfile } from "@/lib/actions";
 import { Span } from "next/dist/trace";
+import UpdateButton from "../../UpdateButton";
 
 const UpdateProfile = ({ user }: { user: User }) => {
   const [state, formAction] = useActionState(updateProfile, {
@@ -11,15 +12,15 @@ const UpdateProfile = ({ user }: { user: User }) => {
 
   return (
     <form
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-4 mb-14"
       action={(formData) => formAction({ formData })}
     >
-      <div className="flex gap-5">
+      <div className="flex flex-col md:flex-row gap-5">
         <div className="flex flex-col gap-2">
           <label className="block text12 font-medium text-text">Pet name</label>
           <input
             type="text"
-            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md"
+            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md w-full"
             placeholder={user.firstname || ""}
             name="firstname"
           />
@@ -30,7 +31,7 @@ const UpdateProfile = ({ user }: { user: User }) => {
           </label>
           <input
             type="text"
-            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md"
+            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md w-full"
             placeholder={user.owner || ""}
             name="owner"
           />
@@ -38,12 +39,12 @@ const UpdateProfile = ({ user }: { user: User }) => {
       </div>
 
       {/* By og Land */}
-      <div className="flex gap-5">
+      <div className="flex gap-5 flex-col md:flex-row">
         <div className="flex flex-col gap-2">
           <label className="block text12 font-medium text-text">City</label>
           <input
             type="text"
-            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md"
+            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md w-full"
             placeholder={user.city || ""}
             name="city"
           />
@@ -52,7 +53,7 @@ const UpdateProfile = ({ user }: { user: User }) => {
           <label className="block text12 font-medium text-text">Country</label>
           <input
             type="text"
-            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md"
+            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md w-full"
             placeholder={user.country || ""}
             name="country"
           />
@@ -60,7 +61,7 @@ const UpdateProfile = ({ user }: { user: User }) => {
       </div>
 
       {/* Race og Farve */}
-      <div className="flex gap-5">
+      <div className="flex gap-5 flex-row">
         <div className="flex flex-col gap-2">
           <label className="block text12 font-medium text-text">Race</label>
           <input
@@ -94,15 +95,15 @@ const UpdateProfile = ({ user }: { user: User }) => {
       </div>
 
       {/* Sociale medier */}
-      <div className="flex gap-5">
+      <div className="flex gap-5 flex-row">
         <div className="flex flex-col gap-2">
           <label className="block text12 font-medium text-text">
             Instagram
           </label>
           <input
             type="text"
-            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md"
-            placeholder={user.instagram || "Instagram username"}
+            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md w-full"
+            placeholder={user.instagram || "Instagram Link"}
             name="instagram"
           />
         </div>
@@ -110,8 +111,8 @@ const UpdateProfile = ({ user }: { user: User }) => {
           <label className="block text12 font-medium text-text">Facebook</label>
           <input
             type="text"
-            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md"
-            placeholder={user.facebook || "Facebook username"}
+            className="p-2 border-2 border-shadow outline-none bg-foreground rounded-md w-full"
+            placeholder={user.facebook || "Facebook Link"}
             name="facebook"
           />
         </div>
@@ -119,9 +120,7 @@ const UpdateProfile = ({ user }: { user: User }) => {
 
       {/* Submit-knap */}
       <div className="flex gap-2 items-center">
-        <button className="btn cursor-pointer w-20" type="submit">
-          Update
-        </button>
+        <UpdateButton />
         {state.success && (
           <span className="text-primary">Profile has been updated!</span>
         )}

@@ -4,19 +4,14 @@ import MenuLeft from "@/components/menuLeft/MenuLeft";
 import MenuRight from "@/components/menuRight/MenuRight";
 import UserInfoCard from "@/components/menuRight/UserInfoCard";
 import UserMediaCard from "@/components/menuRight/UserMediaCard";
-
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
 
-// Type for the props passed to the page component
-
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
   const { username } = params;
-
-  // Fetch the user from the database based on the username
   const user = await prisma.user.findFirst({
     where: { username },
     include: {
@@ -30,19 +25,14 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 
   if (!user) return notFound();
 
-  // Get the current logged-in user info
   const authUser = auth();
-
-  // Ensure the userId is extracted correctly
   const currentUserId = authUser?.userId;
 
-  // Initialize block and follow state variables
   let isBlocked = false;
   let isUserBlocked = false;
   let isFollowing = false;
   let isFollowingSent = false;
 
-  // Check if the current user is blocked by the profile owner
   if (currentUserId) {
     const blockRes = await prisma.block.findFirst({
       where: {
@@ -50,14 +40,11 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         blockedId: currentUserId,
       },
     });
-
     isBlocked = !!blockRes;
   }
 
-  // If the user is blocked, show a not found page
   if (isBlocked) return notFound();
 
-  // Check if the current user has blocked the profile owner and follow status
   if (currentUserId) {
     const userBlockedRes = await prisma.block.findFirst({
       where: {
@@ -65,7 +52,6 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         blockedId: user.id,
       },
     });
-
     isUserBlocked = !!userBlockedRes;
 
     const followRes = await prisma.follower.findFirst({
@@ -74,7 +60,6 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         followingId: user.id,
       },
     });
-
     isFollowing = !!followRes;
 
     const followReqRes = await prisma.followerRequest.findFirst({
@@ -83,7 +68,6 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         receiverId: user.id,
       },
     });
-
     isFollowingSent = !!followReqRes;
   }
 
@@ -96,7 +80,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         <div className="w-full md:w-[70%] xl:w-[50%] h-80">
           <div className="flex flex-col gap-6">
             <div className="py-5 flex flex-col items-center gap-5 bg-foreground rounded-xl shadow-xl text13">
-              <div className="relative w-full h-52 md:h-56  ">
+              <div className="relative w-full h-52 md:h-56">
                 <Image
                   src={user.cover || "/pawcover.png"}
                   alt=""

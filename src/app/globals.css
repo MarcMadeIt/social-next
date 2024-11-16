@@ -78,6 +78,10 @@ body {
     font-size: 14px;
 }
 
+.text13 {
+    font-size: 13px;
+}
+
 .text12 {
     font-size: 12px;
 }
@@ -100,6 +104,7 @@ body {
     border-radius: 10px;
     font-weight: 600;
     transition: all 500ms;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -119,6 +124,7 @@ body {
     border-radius: 8px;
     font-weight: 600;
     transition: all 500ms;
+    cursor: pointer;
 }
 
 .btn-cta:hover {
@@ -143,6 +149,7 @@ body {
     border-radius: 8px;
     font-weight: 500;
     transition: all 500ms;
+    cursor: pointer;
 }
 
 .btn-cta-light:hover {
@@ -171,4 +178,5 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
 }

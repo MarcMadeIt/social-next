@@ -5,7 +5,6 @@ import Link from "next/link";
 
 const ProfileCard = async () => {
   const { userId } = auth();
-
   if (!userId) return null;
 
   const user = await prisma.user.findFirst({
@@ -13,8 +12,6 @@ const ProfileCard = async () => {
       id: userId,
     },
   });
-
-  console.log(user);
 
   if (!user) return null;
 

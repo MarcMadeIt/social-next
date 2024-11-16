@@ -1,12 +1,13 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server"
 import { z } from "zod";
 import prisma from "./client";
+import { revalidatePath } from "next/cache";
+import { auth } from "@clerk/nextjs/server";
 
 export const switchFollow = async (userId: string) => {
 
-    const {userId: currentUserId} = auth();
+    const {userId: currentUserId} = await auth();
 
     if (!currentUserId) {
         throw new Error("user is not autheticated")
@@ -51,13 +52,13 @@ export const switchFollow = async (userId: string) => {
         }
 
     }catch (err) {
-        console.log()
+        console.log(err)
         throw new Error ("Something went wrong")
     }
 }
 
 export const switchBlock = async (userId: string) => {
-    const {userId: currentUserId} = auth() 
+    const {userId: currentUserId} = await auth() 
 
     if(!currentUserId){
         throw new Error("User is not authenticated!")
@@ -90,7 +91,7 @@ export const switchBlock = async (userId: string) => {
 }
 
 export const acceptFollowRequest = async (userId: string) => {
-    const { userId: currentUserId } = auth();
+    const { userId: currentUserId } = await auth();
 
     if (!currentUserId) {
         throw new Error("User is not Authenticated");
@@ -136,7 +137,7 @@ export const acceptFollowRequest = async (userId: string) => {
 };
 
 export const declineFollowRequest = async (userId:string)=> {
-    const { userId: currentUserId} = auth();
+    const { userId: currentUserId} = await auth();
 
     if (!currentUserId) {
         throw new Error ("User is not Authenticated")
@@ -206,7 +207,7 @@ export const updateProfile = async (
     }
   
     // Assume userId is retrieved from an auth mechanism
-    const { userId } = auth();
+    const { userId } = await auth();
   
     if (!userId) {
       console.log("User not authenticated");
@@ -225,3 +226,132 @@ export const updateProfile = async (
       return { success: false, error: true };
     }
   };
+
+export const switchLike = async (postId:number) => {
+    const {userId} = await auth();
+
+    if(!userId) throw new Error("User is not authenticated!")
+
+    try {
+        const existingLike = await prisma.like.findFirst({
+            where:{
+                postId,
+                userId,
+            }
+        })
+    if(existingLike) {
+        await prisma.like.delete({
+            where: {
+                id: existingLike.id,
+            },
+        });
+    }
+    else {
+        await prisma.like.create({
+            data: {
+                postId,
+                userId
+            },
+        });
+    }
+
+    }catch(err) {
+        console.log (err) 
+        throw new Error("Something went wrong")
+    }
+}
+
+export const addComment = async (postId:number, desc:string) => {
+    const {userId} = await auth()
+
+    if(!userId) throw new Error("User is not authenticated!")
+
+        try {
+            const createdComment = await prisma.comment.create({
+                data:{
+                    desc,
+                    userId,
+                    postId,
+                },
+                include: {
+                    user: true
+                }
+            })
+        return createdComment;
+        }catch(err){
+            console.log (err) 
+            throw new Error("Something went wrong")
+        }
+}
+
+
+export const addPost =  async (formData: FormData, img:string) => {
+    const desc = formData.get("desc") as string;
+    const Desc = z.string().min(1).max(225);
+
+    const validatedDesc = Desc.safeParse(desc)
+
+    if (!validatedDesc.success) {
+        
+        return
+    }
+
+    const {userId} = await auth();
+
+    if(!userId) throw new Error("User is not authenticated!")
+
+    try {
+        await prisma.post.create({
+            data:{
+                desc:validatedDesc.data,
+                userId,
+                img,
+            }
+        });
+
+        revalidatePath("/");
+    }catch(err){
+        console.log (err) 
+        throw new Error("Something went wrong")
+    }
+
+}
+
+
+export const deletePost = async (postId: string) => {  
+    const { userId } = await auth();
+
+    if (!userId) throw new Error("User is not authenticated!");
+
+    try {
+
+        const postIdAsNumber = Number(postId);
+
+        if (isNaN(postIdAsNumber)) {
+            throw new Error("Invalid post ID");
+        }
+
+        const post = await prisma.post.findUnique({
+            where: { id: postIdAsNumber },  
+        });
+
+        if (!post) {
+            throw new Error("Post not found");
+        }
+
+        if (post.userId !== userId) {
+            throw new Error("User is not authorized to delete this post");
+        }
+
+        await prisma.post.delete({
+            where: {
+                id: postIdAsNumber,
+            },
+        });
+
+        revalidatePath("/");
+    } catch (err) {
+        console.error(err);
+        throw new Error("Something went wrong while deleting the post");
+    }
+};
