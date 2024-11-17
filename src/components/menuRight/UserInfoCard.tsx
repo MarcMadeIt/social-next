@@ -10,8 +10,8 @@ import UpdateUser from "./updateUser/UpdateUser";
 import { auth } from "@clerk/nextjs/server";
 import { User } from "../../../prisma/generated/client";
 
-const UserInfoCard = ({ user }: { user: User }) => {
-  const { userId: currentUserId } = auth();
+const UserInfoCard = async ({ user }: { user: User }) => {
+  const { userId: currentUserId } = await auth();
 
   const createdAtDate = new Date(user.createdAt);
 

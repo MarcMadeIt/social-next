@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ProfileCard = async () => {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return null;
 
   const user = await prisma.user.findFirst({

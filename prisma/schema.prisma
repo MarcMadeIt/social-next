@@ -30,17 +30,17 @@ model User {
     facebook              String?
     color                 String?
     createdAt             DateTime          @default(now())
-    Posts                 Post[]
-    Likes                 Like[]
-    Comments              Comment[]
-    Followers             Follower[]        @relation("UserFollowers")
-    Followings            Follower[]        @relation("UserFollowings")
-    FollowRequestSent     FollowerRequest[] @relation("FollowRequestSent")
-    FollowRequestReceived FollowerRequest[] @relation("FollowRequestReceived")
+    posts                 Post[]
+    likes                 Like[]
+    comments              Comment[]
+    followers             Follower[]        @relation("UserFollowers")
+    followings            Follower[]        @relation("UserFollowings")
+    followRequestSent     FollowerRequest[] @relation("FollowRequestSent")
+    followRequestReceived FollowerRequest[] @relation("FollowRequestReceived")
 
-    BlockSent     Block[]  @relation("BlockSent")
-    BlockReceived Block[]  @relation("BlockReceived")
-    Stories       Stories?
+    BlockSent     Block[] @relation("BlockSent")
+    BlockReceived Block[] @relation("BlockReceived")
+    stories       Story[]
 }
 
 model Post {
@@ -111,7 +111,7 @@ model Block {
     @@unique([blockerId, blockedId])
 }
 
-model Stories {
+model Story {
     id        Int      @id @default(autoincrement())
     createdAt DateTime @default(now())
     expiresAt DateTime

@@ -21,7 +21,6 @@ import { FaUser } from "react-icons/fa";
 import OptionsModal from "./OptionsModal";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
-import { User } from "../../prisma/generated/client";
 
 const Topbar = () => {
   const [petOptions, setPetOptions] = useState(false);

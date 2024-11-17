@@ -227,39 +227,44 @@ export const updateProfile = async (
     }
   };
 
-export const switchLike = async (postId:number) => {
-    const {userId} = await auth();
-
-    if(!userId) throw new Error("User is not authenticated!")
-
+  export const switchLike = async (postId: number) => {
+    const { userId } = await auth();
+  
+    // Return a specific response if the user is not authenticated
+    if (!userId) {
+      return { success: false, message: "User is not authenticated" };
+    }
+  
     try {
-        const existingLike = await prisma.like.findFirst({
-            where:{
-                postId,
-                userId,
-            }
-        })
-    if(existingLike) {
+      const existingLike = await prisma.like.findFirst({
+        where: {
+          postId,
+          userId,
+        },
+      });
+  
+      if (existingLike) {
         await prisma.like.delete({
-            where: {
-                id: existingLike.id,
-            },
+          where: {
+            id: existingLike.id,
+          },
         });
-    }
-    else {
+      } else {
         await prisma.like.create({
-            data: {
-                postId,
-                userId
-            },
+          data: {
+            postId,
+            userId,
+          },
         });
+      }
+  
+      return { success: true };
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: "Something went wrong" };
     }
-
-    }catch(err) {
-        console.log (err) 
-        throw new Error("Something went wrong")
-    }
-}
+  };
+  
 
 export const addComment = async (postId:number, desc:string) => {
     const {userId} = await auth()
@@ -355,3 +360,43 @@ export const deletePost = async (postId: string) => {
         throw new Error("Something went wrong while deleting the post");
     }
 };
+
+export const addStory =  async (img:string) => {
+
+    const {userId} = await auth();
+
+    if(!userId) throw new Error("User is not authenticated!")
+
+    try {
+
+        const existingStory = await prisma.story.findFirst({
+            where: {
+                userId
+            }
+        })
+
+        if (existingStory) {
+            await prisma.story.delete({
+                where: {
+                    id: existingStory.id
+                }
+            })
+        }
+        const createdStory = await prisma.story.create({
+            data:{
+                userId,
+                img,
+                expiresAt: new Date(Date.now()+24*60*60*1000),
+            },
+            include: {
+                user: true
+            }
+        });
+
+        return createdStory;
+    }catch(err){
+        console.log (err) 
+        throw new Error("Something went wrong")
+    }
+
+}

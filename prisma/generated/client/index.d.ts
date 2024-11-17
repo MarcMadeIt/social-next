@@ -49,10 +49,10 @@ export type FollowerRequest = $Result.DefaultSelection<Prisma.$FollowerRequestPa
  */
 export type Block = $Result.DefaultSelection<Prisma.$BlockPayload>
 /**
- * Model Stories
+ * Model Story
  * 
  */
-export type Stories = $Result.DefaultSelection<Prisma.$StoriesPayload>
+export type Story = $Result.DefaultSelection<Prisma.$StoryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -248,14 +248,14 @@ export class PrismaClient<
   get block(): Prisma.BlockDelegate<ExtArgs>;
 
   /**
-   * `prisma.stories`: Exposes CRUD operations for the **Stories** model.
+   * `prisma.story`: Exposes CRUD operations for the **Story** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Stories
-    * const stories = await prisma.stories.findMany()
+    * const stories = await prisma.story.findMany()
     * ```
     */
-  get stories(): Prisma.StoriesDelegate<ExtArgs>;
+  get story(): Prisma.StoryDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -704,7 +704,7 @@ export namespace Prisma {
     Follower: 'Follower',
     FollowerRequest: 'FollowerRequest',
     Block: 'Block',
-    Stories: 'Stories'
+    Story: 'Story'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -720,7 +720,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "post" | "comment" | "like" | "follower" | "followerRequest" | "block" | "stories"
+      modelProps: "user" | "post" | "comment" | "like" | "follower" | "followerRequest" | "block" | "story"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1186,69 +1186,69 @@ export namespace Prisma {
           }
         }
       }
-      Stories: {
-        payload: Prisma.$StoriesPayload<ExtArgs>
-        fields: Prisma.StoriesFieldRefs
+      Story: {
+        payload: Prisma.$StoryPayload<ExtArgs>
+        fields: Prisma.StoryFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.StoriesFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload> | null
+            args: Prisma.StoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.StoriesFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload>
+            args: Prisma.StoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
           }
           findFirst: {
-            args: Prisma.StoriesFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload> | null
+            args: Prisma.StoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.StoriesFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload>
+            args: Prisma.StoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
           }
           findMany: {
-            args: Prisma.StoriesFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload>[]
+            args: Prisma.StoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>[]
           }
           create: {
-            args: Prisma.StoriesCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload>
+            args: Prisma.StoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
           }
           createMany: {
-            args: Prisma.StoriesCreateManyArgs<ExtArgs>
+            args: Prisma.StoryCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.StoriesDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload>
+            args: Prisma.StoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
           }
           update: {
-            args: Prisma.StoriesUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload>
+            args: Prisma.StoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
           }
           deleteMany: {
-            args: Prisma.StoriesDeleteManyArgs<ExtArgs>
+            args: Prisma.StoryDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.StoriesUpdateManyArgs<ExtArgs>
+            args: Prisma.StoryUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.StoriesUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StoriesPayload>
+            args: Prisma.StoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoryPayload>
           }
           aggregate: {
-            args: Prisma.StoriesAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateStories>
+            args: Prisma.StoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStory>
           }
           groupBy: {
-            args: Prisma.StoriesGroupByArgs<ExtArgs>
-            result: $Utils.Optional<StoriesGroupByOutputType>[]
+            args: Prisma.StoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StoryGroupByOutputType>[]
           }
           count: {
-            args: Prisma.StoriesCountArgs<ExtArgs>
-            result: $Utils.Optional<StoriesCountAggregateOutputType> | number
+            args: Prisma.StoryCountArgs<ExtArgs>
+            result: $Utils.Optional<StoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1413,27 +1413,29 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    Posts: number
-    Likes: number
-    Comments: number
-    Followers: number
-    Followings: number
-    FollowRequestSent: number
-    FollowRequestReceived: number
+    posts: number
+    likes: number
+    comments: number
+    followers: number
+    followings: number
+    followRequestSent: number
+    followRequestReceived: number
     BlockSent: number
     BlockReceived: number
+    stories: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Posts?: boolean | UserCountOutputTypeCountPostsArgs
-    Likes?: boolean | UserCountOutputTypeCountLikesArgs
-    Comments?: boolean | UserCountOutputTypeCountCommentsArgs
-    Followers?: boolean | UserCountOutputTypeCountFollowersArgs
-    Followings?: boolean | UserCountOutputTypeCountFollowingsArgs
-    FollowRequestSent?: boolean | UserCountOutputTypeCountFollowRequestSentArgs
-    FollowRequestReceived?: boolean | UserCountOutputTypeCountFollowRequestReceivedArgs
+    posts?: boolean | UserCountOutputTypeCountPostsArgs
+    likes?: boolean | UserCountOutputTypeCountLikesArgs
+    comments?: boolean | UserCountOutputTypeCountCommentsArgs
+    followers?: boolean | UserCountOutputTypeCountFollowersArgs
+    followings?: boolean | UserCountOutputTypeCountFollowingsArgs
+    followRequestSent?: boolean | UserCountOutputTypeCountFollowRequestSentArgs
+    followRequestReceived?: boolean | UserCountOutputTypeCountFollowRequestReceivedArgs
     BlockSent?: boolean | UserCountOutputTypeCountBlockSentArgs
     BlockReceived?: boolean | UserCountOutputTypeCountBlockReceivedArgs
+    stories?: boolean | UserCountOutputTypeCountStoriesArgs
   }
 
   // Custom InputTypes
@@ -1508,6 +1510,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountBlockReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BlockWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoryWhereInput
   }
 
 
@@ -1830,16 +1839,16 @@ export namespace Prisma {
     facebook?: boolean
     color?: boolean
     createdAt?: boolean
-    Posts?: boolean | User$PostsArgs<ExtArgs>
-    Likes?: boolean | User$LikesArgs<ExtArgs>
-    Comments?: boolean | User$CommentsArgs<ExtArgs>
-    Followers?: boolean | User$FollowersArgs<ExtArgs>
-    Followings?: boolean | User$FollowingsArgs<ExtArgs>
-    FollowRequestSent?: boolean | User$FollowRequestSentArgs<ExtArgs>
-    FollowRequestReceived?: boolean | User$FollowRequestReceivedArgs<ExtArgs>
+    posts?: boolean | User$postsArgs<ExtArgs>
+    likes?: boolean | User$likesArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
+    followers?: boolean | User$followersArgs<ExtArgs>
+    followings?: boolean | User$followingsArgs<ExtArgs>
+    followRequestSent?: boolean | User$followRequestSentArgs<ExtArgs>
+    followRequestReceived?: boolean | User$followRequestReceivedArgs<ExtArgs>
     BlockSent?: boolean | User$BlockSentArgs<ExtArgs>
     BlockReceived?: boolean | User$BlockReceivedArgs<ExtArgs>
-    Stories?: boolean | User$StoriesArgs<ExtArgs>
+    stories?: boolean | User$storiesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1863,32 +1872,32 @@ export namespace Prisma {
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Posts?: boolean | User$PostsArgs<ExtArgs>
-    Likes?: boolean | User$LikesArgs<ExtArgs>
-    Comments?: boolean | User$CommentsArgs<ExtArgs>
-    Followers?: boolean | User$FollowersArgs<ExtArgs>
-    Followings?: boolean | User$FollowingsArgs<ExtArgs>
-    FollowRequestSent?: boolean | User$FollowRequestSentArgs<ExtArgs>
-    FollowRequestReceived?: boolean | User$FollowRequestReceivedArgs<ExtArgs>
+    posts?: boolean | User$postsArgs<ExtArgs>
+    likes?: boolean | User$likesArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
+    followers?: boolean | User$followersArgs<ExtArgs>
+    followings?: boolean | User$followingsArgs<ExtArgs>
+    followRequestSent?: boolean | User$followRequestSentArgs<ExtArgs>
+    followRequestReceived?: boolean | User$followRequestReceivedArgs<ExtArgs>
     BlockSent?: boolean | User$BlockSentArgs<ExtArgs>
     BlockReceived?: boolean | User$BlockReceivedArgs<ExtArgs>
-    Stories?: boolean | User$StoriesArgs<ExtArgs>
+    stories?: boolean | User$storiesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      Posts: Prisma.$PostPayload<ExtArgs>[]
-      Likes: Prisma.$LikePayload<ExtArgs>[]
-      Comments: Prisma.$CommentPayload<ExtArgs>[]
-      Followers: Prisma.$FollowerPayload<ExtArgs>[]
-      Followings: Prisma.$FollowerPayload<ExtArgs>[]
-      FollowRequestSent: Prisma.$FollowerRequestPayload<ExtArgs>[]
-      FollowRequestReceived: Prisma.$FollowerRequestPayload<ExtArgs>[]
+      posts: Prisma.$PostPayload<ExtArgs>[]
+      likes: Prisma.$LikePayload<ExtArgs>[]
+      comments: Prisma.$CommentPayload<ExtArgs>[]
+      followers: Prisma.$FollowerPayload<ExtArgs>[]
+      followings: Prisma.$FollowerPayload<ExtArgs>[]
+      followRequestSent: Prisma.$FollowerRequestPayload<ExtArgs>[]
+      followRequestReceived: Prisma.$FollowerRequestPayload<ExtArgs>[]
       BlockSent: Prisma.$BlockPayload<ExtArgs>[]
       BlockReceived: Prisma.$BlockPayload<ExtArgs>[]
-      Stories: Prisma.$StoriesPayload<ExtArgs> | null
+      stories: Prisma.$StoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2246,16 +2255,16 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Posts<T extends User$PostsArgs<ExtArgs> = {}>(args?: Subset<T, User$PostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany"> | Null>
-    Likes<T extends User$LikesArgs<ExtArgs> = {}>(args?: Subset<T, User$LikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany"> | Null>
-    Comments<T extends User$CommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$CommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany"> | Null>
-    Followers<T extends User$FollowersArgs<ExtArgs> = {}>(args?: Subset<T, User$FollowersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerPayload<ExtArgs>, T, "findMany"> | Null>
-    Followings<T extends User$FollowingsArgs<ExtArgs> = {}>(args?: Subset<T, User$FollowingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerPayload<ExtArgs>, T, "findMany"> | Null>
-    FollowRequestSent<T extends User$FollowRequestSentArgs<ExtArgs> = {}>(args?: Subset<T, User$FollowRequestSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerRequestPayload<ExtArgs>, T, "findMany"> | Null>
-    FollowRequestReceived<T extends User$FollowRequestReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$FollowRequestReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerRequestPayload<ExtArgs>, T, "findMany"> | Null>
+    posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany"> | Null>
+    likes<T extends User$likesArgs<ExtArgs> = {}>(args?: Subset<T, User$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany"> | Null>
+    comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany"> | Null>
+    followers<T extends User$followersArgs<ExtArgs> = {}>(args?: Subset<T, User$followersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerPayload<ExtArgs>, T, "findMany"> | Null>
+    followings<T extends User$followingsArgs<ExtArgs> = {}>(args?: Subset<T, User$followingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerPayload<ExtArgs>, T, "findMany"> | Null>
+    followRequestSent<T extends User$followRequestSentArgs<ExtArgs> = {}>(args?: Subset<T, User$followRequestSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerRequestPayload<ExtArgs>, T, "findMany"> | Null>
+    followRequestReceived<T extends User$followRequestReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$followRequestReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowerRequestPayload<ExtArgs>, T, "findMany"> | Null>
     BlockSent<T extends User$BlockSentArgs<ExtArgs> = {}>(args?: Subset<T, User$BlockSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockPayload<ExtArgs>, T, "findMany"> | Null>
     BlockReceived<T extends User$BlockReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$BlockReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BlockPayload<ExtArgs>, T, "findMany"> | Null>
-    Stories<T extends User$StoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$StoriesArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    stories<T extends User$storiesArgs<ExtArgs> = {}>(args?: Subset<T, User$storiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2599,9 +2608,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Posts
+   * User.posts
    */
-  export type User$PostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$postsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Post
      */
@@ -2619,9 +2628,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Likes
+   * User.likes
    */
-  export type User$LikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Like
      */
@@ -2639,9 +2648,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Comments
+   * User.comments
    */
-  export type User$CommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Comment
      */
@@ -2659,9 +2668,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Followers
+   * User.followers
    */
-  export type User$FollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$followersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Follower
      */
@@ -2679,9 +2688,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Followings
+   * User.followings
    */
-  export type User$FollowingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$followingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Follower
      */
@@ -2699,9 +2708,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.FollowRequestSent
+   * User.followRequestSent
    */
-  export type User$FollowRequestSentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$followRequestSentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the FollowerRequest
      */
@@ -2719,9 +2728,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.FollowRequestReceived
+   * User.followRequestReceived
    */
-  export type User$FollowRequestReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$followRequestReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the FollowerRequest
      */
@@ -2779,18 +2788,23 @@ export namespace Prisma {
   }
 
   /**
-   * User.Stories
+   * User.stories
    */
-  export type User$StoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$storiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
-    where?: StoriesWhereInput
+    include?: StoryInclude<ExtArgs> | null
+    where?: StoryWhereInput
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
+    cursor?: StoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StoryScalarFieldEnum | StoryScalarFieldEnum[]
   }
 
   /**
@@ -8418,34 +8432,26 @@ export namespace Prisma {
 
 
   /**
-   * Model Stories
+   * Model Story
    */
 
-  export type AggregateStories = {
-    _count: StoriesCountAggregateOutputType | null
-    _avg: StoriesAvgAggregateOutputType | null
-    _sum: StoriesSumAggregateOutputType | null
-    _min: StoriesMinAggregateOutputType | null
-    _max: StoriesMaxAggregateOutputType | null
+  export type AggregateStory = {
+    _count: StoryCountAggregateOutputType | null
+    _avg: StoryAvgAggregateOutputType | null
+    _sum: StorySumAggregateOutputType | null
+    _min: StoryMinAggregateOutputType | null
+    _max: StoryMaxAggregateOutputType | null
   }
 
-  export type StoriesAvgAggregateOutputType = {
+  export type StoryAvgAggregateOutputType = {
     id: number | null
   }
 
-  export type StoriesSumAggregateOutputType = {
+  export type StorySumAggregateOutputType = {
     id: number | null
   }
 
-  export type StoriesMinAggregateOutputType = {
-    id: number | null
-    createdAt: Date | null
-    expiresAt: Date | null
-    userId: string | null
-    img: string | null
-  }
-
-  export type StoriesMaxAggregateOutputType = {
+  export type StoryMinAggregateOutputType = {
     id: number | null
     createdAt: Date | null
     expiresAt: Date | null
@@ -8453,7 +8459,15 @@ export namespace Prisma {
     img: string | null
   }
 
-  export type StoriesCountAggregateOutputType = {
+  export type StoryMaxAggregateOutputType = {
+    id: number | null
+    createdAt: Date | null
+    expiresAt: Date | null
+    userId: string | null
+    img: string | null
+  }
+
+  export type StoryCountAggregateOutputType = {
     id: number
     createdAt: number
     expiresAt: number
@@ -8463,23 +8477,15 @@ export namespace Prisma {
   }
 
 
-  export type StoriesAvgAggregateInputType = {
+  export type StoryAvgAggregateInputType = {
     id?: true
   }
 
-  export type StoriesSumAggregateInputType = {
+  export type StorySumAggregateInputType = {
     id?: true
   }
 
-  export type StoriesMinAggregateInputType = {
-    id?: true
-    createdAt?: true
-    expiresAt?: true
-    userId?: true
-    img?: true
-  }
-
-  export type StoriesMaxAggregateInputType = {
+  export type StoryMinAggregateInputType = {
     id?: true
     createdAt?: true
     expiresAt?: true
@@ -8487,7 +8493,15 @@ export namespace Prisma {
     img?: true
   }
 
-  export type StoriesCountAggregateInputType = {
+  export type StoryMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    expiresAt?: true
+    userId?: true
+    img?: true
+  }
+
+  export type StoryCountAggregateInputType = {
     id?: true
     createdAt?: true
     expiresAt?: true
@@ -8496,23 +8510,23 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type StoriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Stories to aggregate.
+     * Filter which Story to aggregate.
      */
-    where?: StoriesWhereInput
+    where?: StoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Stories to fetch.
      */
-    orderBy?: StoriesOrderByWithRelationInput | StoriesOrderByWithRelationInput[]
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: StoriesWhereUniqueInput
+    cursor?: StoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -8530,96 +8544,96 @@ export namespace Prisma {
      * 
      * Count returned Stories
     **/
-    _count?: true | StoriesCountAggregateInputType
+    _count?: true | StoryCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: StoriesAvgAggregateInputType
+    _avg?: StoryAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: StoriesSumAggregateInputType
+    _sum?: StorySumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: StoriesMinAggregateInputType
+    _min?: StoryMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: StoriesMaxAggregateInputType
+    _max?: StoryMaxAggregateInputType
   }
 
-  export type GetStoriesAggregateType<T extends StoriesAggregateArgs> = {
-        [P in keyof T & keyof AggregateStories]: P extends '_count' | 'count'
+  export type GetStoryAggregateType<T extends StoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateStory]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateStories[P]>
-      : GetScalarType<T[P], AggregateStories[P]>
+        : GetScalarType<T[P], AggregateStory[P]>
+      : GetScalarType<T[P], AggregateStory[P]>
   }
 
 
 
 
-  export type StoriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StoriesWhereInput
-    orderBy?: StoriesOrderByWithAggregationInput | StoriesOrderByWithAggregationInput[]
-    by: StoriesScalarFieldEnum[] | StoriesScalarFieldEnum
-    having?: StoriesScalarWhereWithAggregatesInput
+  export type StoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoryWhereInput
+    orderBy?: StoryOrderByWithAggregationInput | StoryOrderByWithAggregationInput[]
+    by: StoryScalarFieldEnum[] | StoryScalarFieldEnum
+    having?: StoryScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: StoriesCountAggregateInputType | true
-    _avg?: StoriesAvgAggregateInputType
-    _sum?: StoriesSumAggregateInputType
-    _min?: StoriesMinAggregateInputType
-    _max?: StoriesMaxAggregateInputType
+    _count?: StoryCountAggregateInputType | true
+    _avg?: StoryAvgAggregateInputType
+    _sum?: StorySumAggregateInputType
+    _min?: StoryMinAggregateInputType
+    _max?: StoryMaxAggregateInputType
   }
 
-  export type StoriesGroupByOutputType = {
+  export type StoryGroupByOutputType = {
     id: number
     createdAt: Date
     expiresAt: Date
     userId: string
     img: string
-    _count: StoriesCountAggregateOutputType | null
-    _avg: StoriesAvgAggregateOutputType | null
-    _sum: StoriesSumAggregateOutputType | null
-    _min: StoriesMinAggregateOutputType | null
-    _max: StoriesMaxAggregateOutputType | null
+    _count: StoryCountAggregateOutputType | null
+    _avg: StoryAvgAggregateOutputType | null
+    _sum: StorySumAggregateOutputType | null
+    _min: StoryMinAggregateOutputType | null
+    _max: StoryMaxAggregateOutputType | null
   }
 
-  type GetStoriesGroupByPayload<T extends StoriesGroupByArgs> = Prisma.PrismaPromise<
+  type GetStoryGroupByPayload<T extends StoryGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<StoriesGroupByOutputType, T['by']> &
+      PickEnumerable<StoryGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof StoriesGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof StoryGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], StoriesGroupByOutputType[P]>
-            : GetScalarType<T[P], StoriesGroupByOutputType[P]>
+              : GetScalarType<T[P], StoryGroupByOutputType[P]>
+            : GetScalarType<T[P], StoryGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type StoriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     createdAt?: boolean
     expiresAt?: boolean
     userId?: boolean
     img?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["stories"]>
+  }, ExtArgs["result"]["story"]>
 
 
-  export type StoriesSelectScalar = {
+  export type StorySelectScalar = {
     id?: boolean
     createdAt?: boolean
     expiresAt?: boolean
@@ -8627,12 +8641,12 @@ export namespace Prisma {
     img?: boolean
   }
 
-  export type StoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $StoriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Stories"
+  export type $StoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Story"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
@@ -8642,143 +8656,143 @@ export namespace Prisma {
       expiresAt: Date
       userId: string
       img: string
-    }, ExtArgs["result"]["stories"]>
+    }, ExtArgs["result"]["story"]>
     composites: {}
   }
 
-  type StoriesGetPayload<S extends boolean | null | undefined | StoriesDefaultArgs> = $Result.GetResult<Prisma.$StoriesPayload, S>
+  type StoryGetPayload<S extends boolean | null | undefined | StoryDefaultArgs> = $Result.GetResult<Prisma.$StoryPayload, S>
 
-  type StoriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<StoriesFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: StoriesCountAggregateInputType | true
+  type StoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StoryCountAggregateInputType | true
     }
 
-  export interface StoriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Stories'], meta: { name: 'Stories' } }
+  export interface StoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Story'], meta: { name: 'Story' } }
     /**
-     * Find zero or one Stories that matches the filter.
-     * @param {StoriesFindUniqueArgs} args - Arguments to find a Stories
+     * Find zero or one Story that matches the filter.
+     * @param {StoryFindUniqueArgs} args - Arguments to find a Story
      * @example
-     * // Get one Stories
-     * const stories = await prisma.stories.findUnique({
+     * // Get one Story
+     * const story = await prisma.story.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends StoriesFindUniqueArgs>(args: SelectSubset<T, StoriesFindUniqueArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends StoryFindUniqueArgs>(args: SelectSubset<T, StoryFindUniqueArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Stories that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Story that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {StoriesFindUniqueOrThrowArgs} args - Arguments to find a Stories
+     * @param {StoryFindUniqueOrThrowArgs} args - Arguments to find a Story
      * @example
-     * // Get one Stories
-     * const stories = await prisma.stories.findUniqueOrThrow({
+     * // Get one Story
+     * const story = await prisma.story.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends StoriesFindUniqueOrThrowArgs>(args: SelectSubset<T, StoriesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends StoryFindUniqueOrThrowArgs>(args: SelectSubset<T, StoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
-     * Find the first Stories that matches the filter.
+     * Find the first Story that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StoriesFindFirstArgs} args - Arguments to find a Stories
+     * @param {StoryFindFirstArgs} args - Arguments to find a Story
      * @example
-     * // Get one Stories
-     * const stories = await prisma.stories.findFirst({
+     * // Get one Story
+     * const story = await prisma.story.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends StoriesFindFirstArgs>(args?: SelectSubset<T, StoriesFindFirstArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends StoryFindFirstArgs>(args?: SelectSubset<T, StoryFindFirstArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
-     * Find the first Stories that matches the filter or
+     * Find the first Story that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StoriesFindFirstOrThrowArgs} args - Arguments to find a Stories
+     * @param {StoryFindFirstOrThrowArgs} args - Arguments to find a Story
      * @example
-     * // Get one Stories
-     * const stories = await prisma.stories.findFirstOrThrow({
+     * // Get one Story
+     * const story = await prisma.story.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends StoriesFindFirstOrThrowArgs>(args?: SelectSubset<T, StoriesFindFirstOrThrowArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends StoryFindFirstOrThrowArgs>(args?: SelectSubset<T, StoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
      * Find zero or more Stories that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StoriesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {StoryFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Stories
-     * const stories = await prisma.stories.findMany()
+     * const stories = await prisma.story.findMany()
      * 
      * // Get first 10 Stories
-     * const stories = await prisma.stories.findMany({ take: 10 })
+     * const stories = await prisma.story.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const storiesWithIdOnly = await prisma.stories.findMany({ select: { id: true } })
+     * const storyWithIdOnly = await prisma.story.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends StoriesFindManyArgs>(args?: SelectSubset<T, StoriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "findMany">>
+    findMany<T extends StoryFindManyArgs>(args?: SelectSubset<T, StoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findMany">>
 
     /**
-     * Create a Stories.
-     * @param {StoriesCreateArgs} args - Arguments to create a Stories.
+     * Create a Story.
+     * @param {StoryCreateArgs} args - Arguments to create a Story.
      * @example
-     * // Create one Stories
-     * const Stories = await prisma.stories.create({
+     * // Create one Story
+     * const Story = await prisma.story.create({
      *   data: {
-     *     // ... data to create a Stories
+     *     // ... data to create a Story
      *   }
      * })
      * 
      */
-    create<T extends StoriesCreateArgs>(args: SelectSubset<T, StoriesCreateArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends StoryCreateArgs>(args: SelectSubset<T, StoryCreateArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
      * Create many Stories.
-     * @param {StoriesCreateManyArgs} args - Arguments to create many Stories.
+     * @param {StoryCreateManyArgs} args - Arguments to create many Stories.
      * @example
      * // Create many Stories
-     * const stories = await prisma.stories.createMany({
+     * const story = await prisma.story.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends StoriesCreateManyArgs>(args?: SelectSubset<T, StoriesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends StoryCreateManyArgs>(args?: SelectSubset<T, StoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Stories.
-     * @param {StoriesDeleteArgs} args - Arguments to delete one Stories.
+     * Delete a Story.
+     * @param {StoryDeleteArgs} args - Arguments to delete one Story.
      * @example
-     * // Delete one Stories
-     * const Stories = await prisma.stories.delete({
+     * // Delete one Story
+     * const Story = await prisma.story.delete({
      *   where: {
-     *     // ... filter to delete one Stories
+     *     // ... filter to delete one Story
      *   }
      * })
      * 
      */
-    delete<T extends StoriesDeleteArgs>(args: SelectSubset<T, StoriesDeleteArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends StoryDeleteArgs>(args: SelectSubset<T, StoryDeleteArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
-     * Update one Stories.
-     * @param {StoriesUpdateArgs} args - Arguments to update one Stories.
+     * Update one Story.
+     * @param {StoryUpdateArgs} args - Arguments to update one Story.
      * @example
-     * // Update one Stories
-     * const stories = await prisma.stories.update({
+     * // Update one Story
+     * const story = await prisma.story.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8788,30 +8802,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends StoriesUpdateArgs>(args: SelectSubset<T, StoriesUpdateArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends StoryUpdateArgs>(args: SelectSubset<T, StoryUpdateArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
      * Delete zero or more Stories.
-     * @param {StoriesDeleteManyArgs} args - Arguments to filter Stories to delete.
+     * @param {StoryDeleteManyArgs} args - Arguments to filter Stories to delete.
      * @example
      * // Delete a few Stories
-     * const { count } = await prisma.stories.deleteMany({
+     * const { count } = await prisma.story.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends StoriesDeleteManyArgs>(args?: SelectSubset<T, StoriesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends StoryDeleteManyArgs>(args?: SelectSubset<T, StoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Stories.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StoriesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {StoryUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Stories
-     * const stories = await prisma.stories.updateMany({
+     * const story = await prisma.story.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -8821,56 +8835,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends StoriesUpdateManyArgs>(args: SelectSubset<T, StoriesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends StoryUpdateManyArgs>(args: SelectSubset<T, StoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Stories.
-     * @param {StoriesUpsertArgs} args - Arguments to update or create a Stories.
+     * Create or update one Story.
+     * @param {StoryUpsertArgs} args - Arguments to update or create a Story.
      * @example
-     * // Update or create a Stories
-     * const stories = await prisma.stories.upsert({
+     * // Update or create a Story
+     * const story = await prisma.story.upsert({
      *   create: {
-     *     // ... data to create a Stories
+     *     // ... data to create a Story
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Stories we want to update
+     *     // ... the filter for the Story we want to update
      *   }
      * })
      */
-    upsert<T extends StoriesUpsertArgs>(args: SelectSubset<T, StoriesUpsertArgs<ExtArgs>>): Prisma__StoriesClient<$Result.GetResult<Prisma.$StoriesPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends StoryUpsertArgs>(args: SelectSubset<T, StoryUpsertArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
 
     /**
      * Count the number of Stories.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StoriesCountArgs} args - Arguments to filter Stories to count.
+     * @param {StoryCountArgs} args - Arguments to filter Stories to count.
      * @example
      * // Count the number of Stories
-     * const count = await prisma.stories.count({
+     * const count = await prisma.story.count({
      *   where: {
      *     // ... the filter for the Stories we want to count
      *   }
      * })
     **/
-    count<T extends StoriesCountArgs>(
-      args?: Subset<T, StoriesCountArgs>,
+    count<T extends StoryCountArgs>(
+      args?: Subset<T, StoryCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], StoriesCountAggregateOutputType>
+          : GetScalarType<T['select'], StoryCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Stories.
+     * Allows you to perform aggregations operations on a Story.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StoriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {StoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -8890,13 +8904,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends StoriesAggregateArgs>(args: Subset<T, StoriesAggregateArgs>): Prisma.PrismaPromise<GetStoriesAggregateType<T>>
+    aggregate<T extends StoryAggregateArgs>(args: Subset<T, StoryAggregateArgs>): Prisma.PrismaPromise<GetStoryAggregateType<T>>
 
     /**
-     * Group by Stories.
+     * Group by Story.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {StoriesGroupByArgs} args - Group by arguments.
+     * @param {StoryGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -8911,14 +8925,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends StoriesGroupByArgs,
+      T extends StoryGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: StoriesGroupByArgs['orderBy'] }
-        : { orderBy?: StoriesGroupByArgs['orderBy'] },
+        ? { orderBy: StoryGroupByArgs['orderBy'] }
+        : { orderBy?: StoryGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -8967,20 +8981,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, StoriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStoriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, StoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Stories model
+   * Fields of the Story model
    */
-  readonly fields: StoriesFieldRefs;
+  readonly fields: StoryFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Stories.
+   * The delegate class that acts as a "Promise-like" for Story.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__StoriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__StoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
@@ -9009,82 +9023,82 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Stories model
+   * Fields of the Story model
    */ 
-  interface StoriesFieldRefs {
-    readonly id: FieldRef<"Stories", 'Int'>
-    readonly createdAt: FieldRef<"Stories", 'DateTime'>
-    readonly expiresAt: FieldRef<"Stories", 'DateTime'>
-    readonly userId: FieldRef<"Stories", 'String'>
-    readonly img: FieldRef<"Stories", 'String'>
+  interface StoryFieldRefs {
+    readonly id: FieldRef<"Story", 'Int'>
+    readonly createdAt: FieldRef<"Story", 'DateTime'>
+    readonly expiresAt: FieldRef<"Story", 'DateTime'>
+    readonly userId: FieldRef<"Story", 'String'>
+    readonly img: FieldRef<"Story", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * Stories findUnique
+   * Story findUnique
    */
-  export type StoriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * Filter, which Stories to fetch.
+     * Filter, which Story to fetch.
      */
-    where: StoriesWhereUniqueInput
+    where: StoryWhereUniqueInput
   }
 
   /**
-   * Stories findUniqueOrThrow
+   * Story findUniqueOrThrow
    */
-  export type StoriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * Filter, which Stories to fetch.
+     * Filter, which Story to fetch.
      */
-    where: StoriesWhereUniqueInput
+    where: StoryWhereUniqueInput
   }
 
   /**
-   * Stories findFirst
+   * Story findFirst
    */
-  export type StoriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * Filter, which Stories to fetch.
+     * Filter, which Story to fetch.
      */
-    where?: StoriesWhereInput
+    where?: StoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Stories to fetch.
      */
-    orderBy?: StoriesOrderByWithRelationInput | StoriesOrderByWithRelationInput[]
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Stories.
      */
-    cursor?: StoriesWhereUniqueInput
+    cursor?: StoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -9102,37 +9116,37 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Stories.
      */
-    distinct?: StoriesScalarFieldEnum | StoriesScalarFieldEnum[]
+    distinct?: StoryScalarFieldEnum | StoryScalarFieldEnum[]
   }
 
   /**
-   * Stories findFirstOrThrow
+   * Story findFirstOrThrow
    */
-  export type StoriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * Filter, which Stories to fetch.
+     * Filter, which Story to fetch.
      */
-    where?: StoriesWhereInput
+    where?: StoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Stories to fetch.
      */
-    orderBy?: StoriesOrderByWithRelationInput | StoriesOrderByWithRelationInput[]
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for Stories.
      */
-    cursor?: StoriesWhereUniqueInput
+    cursor?: StoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -9150,37 +9164,37 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of Stories.
      */
-    distinct?: StoriesScalarFieldEnum | StoriesScalarFieldEnum[]
+    distinct?: StoryScalarFieldEnum | StoryScalarFieldEnum[]
   }
 
   /**
-   * Stories findMany
+   * Story findMany
    */
-  export type StoriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
      * Filter, which Stories to fetch.
      */
-    where?: StoriesWhereInput
+    where?: StoryWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of Stories to fetch.
      */
-    orderBy?: StoriesOrderByWithRelationInput | StoriesOrderByWithRelationInput[]
+    orderBy?: StoryOrderByWithRelationInput | StoryOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing Stories.
      */
-    cursor?: StoriesWhereUniqueInput
+    cursor?: StoryWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -9193,140 +9207,140 @@ export namespace Prisma {
      * Skip the first `n` Stories.
      */
     skip?: number
-    distinct?: StoriesScalarFieldEnum | StoriesScalarFieldEnum[]
+    distinct?: StoryScalarFieldEnum | StoryScalarFieldEnum[]
   }
 
   /**
-   * Stories create
+   * Story create
    */
-  export type StoriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * The data needed to create a Stories.
+     * The data needed to create a Story.
      */
-    data: XOR<StoriesCreateInput, StoriesUncheckedCreateInput>
+    data: XOR<StoryCreateInput, StoryUncheckedCreateInput>
   }
 
   /**
-   * Stories createMany
+   * Story createMany
    */
-  export type StoriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many Stories.
      */
-    data: StoriesCreateManyInput | StoriesCreateManyInput[]
+    data: StoryCreateManyInput | StoryCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Stories update
+   * Story update
    */
-  export type StoriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * The data needed to update a Stories.
+     * The data needed to update a Story.
      */
-    data: XOR<StoriesUpdateInput, StoriesUncheckedUpdateInput>
+    data: XOR<StoryUpdateInput, StoryUncheckedUpdateInput>
     /**
-     * Choose, which Stories to update.
+     * Choose, which Story to update.
      */
-    where: StoriesWhereUniqueInput
+    where: StoryWhereUniqueInput
   }
 
   /**
-   * Stories updateMany
+   * Story updateMany
    */
-  export type StoriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update Stories.
      */
-    data: XOR<StoriesUpdateManyMutationInput, StoriesUncheckedUpdateManyInput>
+    data: XOR<StoryUpdateManyMutationInput, StoryUncheckedUpdateManyInput>
     /**
      * Filter which Stories to update
      */
-    where?: StoriesWhereInput
+    where?: StoryWhereInput
   }
 
   /**
-   * Stories upsert
+   * Story upsert
    */
-  export type StoriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * The filter to search for the Stories to update in case it exists.
+     * The filter to search for the Story to update in case it exists.
      */
-    where: StoriesWhereUniqueInput
+    where: StoryWhereUniqueInput
     /**
-     * In case the Stories found by the `where` argument doesn't exist, create a new Stories with this data.
+     * In case the Story found by the `where` argument doesn't exist, create a new Story with this data.
      */
-    create: XOR<StoriesCreateInput, StoriesUncheckedCreateInput>
+    create: XOR<StoryCreateInput, StoryUncheckedCreateInput>
     /**
-     * In case the Stories was found with the provided `where` argument, update it with this data.
+     * In case the Story was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<StoriesUpdateInput, StoriesUncheckedUpdateInput>
+    update: XOR<StoryUpdateInput, StoryUncheckedUpdateInput>
   }
 
   /**
-   * Stories delete
+   * Story delete
    */
-  export type StoriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
     /**
-     * Filter which Stories to delete.
+     * Filter which Story to delete.
      */
-    where: StoriesWhereUniqueInput
+    where: StoryWhereUniqueInput
   }
 
   /**
-   * Stories deleteMany
+   * Story deleteMany
    */
-  export type StoriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which Stories to delete
      */
-    where?: StoriesWhereInput
+    where?: StoryWhereInput
   }
 
   /**
-   * Stories without action
+   * Story without action
    */
-  export type StoriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Stories
+     * Select specific fields to fetch from the Story
      */
-    select?: StoriesSelect<ExtArgs> | null
+    select?: StorySelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: StoriesInclude<ExtArgs> | null
+    include?: StoryInclude<ExtArgs> | null
   }
 
 
@@ -9430,7 +9444,7 @@ export namespace Prisma {
   export type BlockScalarFieldEnum = (typeof BlockScalarFieldEnum)[keyof typeof BlockScalarFieldEnum]
 
 
-  export const StoriesScalarFieldEnum: {
+  export const StoryScalarFieldEnum: {
     id: 'id',
     createdAt: 'createdAt',
     expiresAt: 'expiresAt',
@@ -9438,7 +9452,7 @@ export namespace Prisma {
     img: 'img'
   };
 
-  export type StoriesScalarFieldEnum = (typeof StoriesScalarFieldEnum)[keyof typeof StoriesScalarFieldEnum]
+  export type StoryScalarFieldEnum = (typeof StoryScalarFieldEnum)[keyof typeof StoryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9512,16 +9526,16 @@ export namespace Prisma {
     facebook?: StringNullableFilter<"User"> | string | null
     color?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
-    Posts?: PostListRelationFilter
-    Likes?: LikeListRelationFilter
-    Comments?: CommentListRelationFilter
-    Followers?: FollowerListRelationFilter
-    Followings?: FollowerListRelationFilter
-    FollowRequestSent?: FollowerRequestListRelationFilter
-    FollowRequestReceived?: FollowerRequestListRelationFilter
+    posts?: PostListRelationFilter
+    likes?: LikeListRelationFilter
+    comments?: CommentListRelationFilter
+    followers?: FollowerListRelationFilter
+    followings?: FollowerListRelationFilter
+    followRequestSent?: FollowerRequestListRelationFilter
+    followRequestReceived?: FollowerRequestListRelationFilter
     BlockSent?: BlockListRelationFilter
     BlockReceived?: BlockListRelationFilter
-    Stories?: XOR<StoriesNullableRelationFilter, StoriesWhereInput> | null
+    stories?: StoryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9540,16 +9554,16 @@ export namespace Prisma {
     facebook?: SortOrderInput | SortOrder
     color?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    Posts?: PostOrderByRelationAggregateInput
-    Likes?: LikeOrderByRelationAggregateInput
-    Comments?: CommentOrderByRelationAggregateInput
-    Followers?: FollowerOrderByRelationAggregateInput
-    Followings?: FollowerOrderByRelationAggregateInput
-    FollowRequestSent?: FollowerRequestOrderByRelationAggregateInput
-    FollowRequestReceived?: FollowerRequestOrderByRelationAggregateInput
+    posts?: PostOrderByRelationAggregateInput
+    likes?: LikeOrderByRelationAggregateInput
+    comments?: CommentOrderByRelationAggregateInput
+    followers?: FollowerOrderByRelationAggregateInput
+    followings?: FollowerOrderByRelationAggregateInput
+    followRequestSent?: FollowerRequestOrderByRelationAggregateInput
+    followRequestReceived?: FollowerRequestOrderByRelationAggregateInput
     BlockSent?: BlockOrderByRelationAggregateInput
     BlockReceived?: BlockOrderByRelationAggregateInput
-    Stories?: StoriesOrderByWithRelationInput
+    stories?: StoryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9571,16 +9585,16 @@ export namespace Prisma {
     facebook?: StringNullableFilter<"User"> | string | null
     color?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
-    Posts?: PostListRelationFilter
-    Likes?: LikeListRelationFilter
-    Comments?: CommentListRelationFilter
-    Followers?: FollowerListRelationFilter
-    Followings?: FollowerListRelationFilter
-    FollowRequestSent?: FollowerRequestListRelationFilter
-    FollowRequestReceived?: FollowerRequestListRelationFilter
+    posts?: PostListRelationFilter
+    likes?: LikeListRelationFilter
+    comments?: CommentListRelationFilter
+    followers?: FollowerListRelationFilter
+    followings?: FollowerListRelationFilter
+    followRequestSent?: FollowerRequestListRelationFilter
+    followRequestReceived?: FollowerRequestListRelationFilter
     BlockSent?: BlockListRelationFilter
     BlockReceived?: BlockListRelationFilter
-    Stories?: XOR<StoriesNullableRelationFilter, StoriesWhereInput> | null
+    stories?: StoryListRelationFilter
   }, "id" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -9991,19 +10005,19 @@ export namespace Prisma {
     blockedId?: StringWithAggregatesFilter<"Block"> | string
   }
 
-  export type StoriesWhereInput = {
-    AND?: StoriesWhereInput | StoriesWhereInput[]
-    OR?: StoriesWhereInput[]
-    NOT?: StoriesWhereInput | StoriesWhereInput[]
-    id?: IntFilter<"Stories"> | number
-    createdAt?: DateTimeFilter<"Stories"> | Date | string
-    expiresAt?: DateTimeFilter<"Stories"> | Date | string
-    userId?: StringFilter<"Stories"> | string
-    img?: StringFilter<"Stories"> | string
+  export type StoryWhereInput = {
+    AND?: StoryWhereInput | StoryWhereInput[]
+    OR?: StoryWhereInput[]
+    NOT?: StoryWhereInput | StoryWhereInput[]
+    id?: IntFilter<"Story"> | number
+    createdAt?: DateTimeFilter<"Story"> | Date | string
+    expiresAt?: DateTimeFilter<"Story"> | Date | string
+    userId?: StringFilter<"Story"> | string
+    img?: StringFilter<"Story"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
-  export type StoriesOrderByWithRelationInput = {
+  export type StoryOrderByWithRelationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrder
@@ -10012,40 +10026,40 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
   }
 
-  export type StoriesWhereUniqueInput = Prisma.AtLeast<{
+  export type StoryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     userId?: string
     img?: string
-    AND?: StoriesWhereInput | StoriesWhereInput[]
-    OR?: StoriesWhereInput[]
-    NOT?: StoriesWhereInput | StoriesWhereInput[]
-    createdAt?: DateTimeFilter<"Stories"> | Date | string
-    expiresAt?: DateTimeFilter<"Stories"> | Date | string
+    AND?: StoryWhereInput | StoryWhereInput[]
+    OR?: StoryWhereInput[]
+    NOT?: StoryWhereInput | StoryWhereInput[]
+    createdAt?: DateTimeFilter<"Story"> | Date | string
+    expiresAt?: DateTimeFilter<"Story"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id" | "userId" | "img">
 
-  export type StoriesOrderByWithAggregationInput = {
+  export type StoryOrderByWithAggregationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrder
     userId?: SortOrder
     img?: SortOrder
-    _count?: StoriesCountOrderByAggregateInput
-    _avg?: StoriesAvgOrderByAggregateInput
-    _max?: StoriesMaxOrderByAggregateInput
-    _min?: StoriesMinOrderByAggregateInput
-    _sum?: StoriesSumOrderByAggregateInput
+    _count?: StoryCountOrderByAggregateInput
+    _avg?: StoryAvgOrderByAggregateInput
+    _max?: StoryMaxOrderByAggregateInput
+    _min?: StoryMinOrderByAggregateInput
+    _sum?: StorySumOrderByAggregateInput
   }
 
-  export type StoriesScalarWhereWithAggregatesInput = {
-    AND?: StoriesScalarWhereWithAggregatesInput | StoriesScalarWhereWithAggregatesInput[]
-    OR?: StoriesScalarWhereWithAggregatesInput[]
-    NOT?: StoriesScalarWhereWithAggregatesInput | StoriesScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Stories"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"Stories"> | Date | string
-    expiresAt?: DateTimeWithAggregatesFilter<"Stories"> | Date | string
-    userId?: StringWithAggregatesFilter<"Stories"> | string
-    img?: StringWithAggregatesFilter<"Stories"> | string
+  export type StoryScalarWhereWithAggregatesInput = {
+    AND?: StoryScalarWhereWithAggregatesInput | StoryScalarWhereWithAggregatesInput[]
+    OR?: StoryScalarWhereWithAggregatesInput[]
+    NOT?: StoryScalarWhereWithAggregatesInput | StoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Story"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Story"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"Story"> | Date | string
+    userId?: StringWithAggregatesFilter<"Story"> | string
+    img?: StringWithAggregatesFilter<"Story"> | string
   }
 
   export type UserCreateInput = {
@@ -10064,16 +10078,16 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10092,16 +10106,16 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10120,16 +10134,16 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10148,16 +10162,16 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10525,14 +10539,14 @@ export namespace Prisma {
     blockedId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type StoriesCreateInput = {
+  export type StoryCreateInput = {
     createdAt?: Date | string
     expiresAt: Date | string
     img: string
     user: UserCreateNestedOneWithoutStoriesInput
   }
 
-  export type StoriesUncheckedCreateInput = {
+  export type StoryUncheckedCreateInput = {
     id?: number
     createdAt?: Date | string
     expiresAt: Date | string
@@ -10540,14 +10554,14 @@ export namespace Prisma {
     img: string
   }
 
-  export type StoriesUpdateInput = {
+  export type StoryUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     img?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutStoriesNestedInput
   }
 
-  export type StoriesUncheckedUpdateInput = {
+  export type StoryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10555,7 +10569,7 @@ export namespace Prisma {
     img?: StringFieldUpdateOperationsInput | string
   }
 
-  export type StoriesCreateManyInput = {
+  export type StoryCreateManyInput = {
     id?: number
     createdAt?: Date | string
     expiresAt: Date | string
@@ -10563,13 +10577,13 @@ export namespace Prisma {
     img: string
   }
 
-  export type StoriesUpdateManyMutationInput = {
+  export type StoryUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     img?: StringFieldUpdateOperationsInput | string
   }
 
-  export type StoriesUncheckedUpdateManyInput = {
+  export type StoryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10652,9 +10666,10 @@ export namespace Prisma {
     none?: BlockWhereInput
   }
 
-  export type StoriesNullableRelationFilter = {
-    is?: StoriesWhereInput | null
-    isNot?: StoriesWhereInput | null
+  export type StoryListRelationFilter = {
+    every?: StoryWhereInput
+    some?: StoryWhereInput
+    none?: StoryWhereInput
   }
 
   export type SortOrderInput = {
@@ -10683,6 +10698,10 @@ export namespace Prisma {
   }
 
   export type BlockOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11067,7 +11086,7 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type StoriesCountOrderByAggregateInput = {
+  export type StoryCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrder
@@ -11075,19 +11094,11 @@ export namespace Prisma {
     img?: SortOrder
   }
 
-  export type StoriesAvgOrderByAggregateInput = {
+  export type StoryAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type StoriesMaxOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-    userId?: SortOrder
-    img?: SortOrder
-  }
-
-  export type StoriesMinOrderByAggregateInput = {
+  export type StoryMaxOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrder
@@ -11095,7 +11106,15 @@ export namespace Prisma {
     img?: SortOrder
   }
 
-  export type StoriesSumOrderByAggregateInput = {
+  export type StoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+    userId?: SortOrder
+    img?: SortOrder
+  }
+
+  export type StorySumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -11162,10 +11181,11 @@ export namespace Prisma {
     connect?: BlockWhereUniqueInput | BlockWhereUniqueInput[]
   }
 
-  export type StoriesCreateNestedOneWithoutUserInput = {
-    create?: XOR<StoriesCreateWithoutUserInput, StoriesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StoriesCreateOrConnectWithoutUserInput
-    connect?: StoriesWhereUniqueInput
+  export type StoryCreateNestedManyWithoutUserInput = {
+    create?: XOR<StoryCreateWithoutUserInput, StoryUncheckedCreateWithoutUserInput> | StoryCreateWithoutUserInput[] | StoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StoryCreateOrConnectWithoutUserInput | StoryCreateOrConnectWithoutUserInput[]
+    createMany?: StoryCreateManyUserInputEnvelope
+    connect?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
   }
 
   export type PostUncheckedCreateNestedManyWithoutUserInput = {
@@ -11231,10 +11251,11 @@ export namespace Prisma {
     connect?: BlockWhereUniqueInput | BlockWhereUniqueInput[]
   }
 
-  export type StoriesUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<StoriesCreateWithoutUserInput, StoriesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StoriesCreateOrConnectWithoutUserInput
-    connect?: StoriesWhereUniqueInput
+  export type StoryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<StoryCreateWithoutUserInput, StoryUncheckedCreateWithoutUserInput> | StoryCreateWithoutUserInput[] | StoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StoryCreateOrConnectWithoutUserInput | StoryCreateOrConnectWithoutUserInput[]
+    createMany?: StoryCreateManyUserInputEnvelope
+    connect?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11375,14 +11396,18 @@ export namespace Prisma {
     deleteMany?: BlockScalarWhereInput | BlockScalarWhereInput[]
   }
 
-  export type StoriesUpdateOneWithoutUserNestedInput = {
-    create?: XOR<StoriesCreateWithoutUserInput, StoriesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StoriesCreateOrConnectWithoutUserInput
-    upsert?: StoriesUpsertWithoutUserInput
-    disconnect?: StoriesWhereInput | boolean
-    delete?: StoriesWhereInput | boolean
-    connect?: StoriesWhereUniqueInput
-    update?: XOR<XOR<StoriesUpdateToOneWithWhereWithoutUserInput, StoriesUpdateWithoutUserInput>, StoriesUncheckedUpdateWithoutUserInput>
+  export type StoryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StoryCreateWithoutUserInput, StoryUncheckedCreateWithoutUserInput> | StoryCreateWithoutUserInput[] | StoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StoryCreateOrConnectWithoutUserInput | StoryCreateOrConnectWithoutUserInput[]
+    upsert?: StoryUpsertWithWhereUniqueWithoutUserInput | StoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StoryCreateManyUserInputEnvelope
+    set?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    disconnect?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    delete?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    connect?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    update?: StoryUpdateWithWhereUniqueWithoutUserInput | StoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StoryUpdateManyWithWhereWithoutUserInput | StoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StoryScalarWhereInput | StoryScalarWhereInput[]
   }
 
   export type PostUncheckedUpdateManyWithoutUserNestedInput = {
@@ -11511,14 +11536,18 @@ export namespace Prisma {
     deleteMany?: BlockScalarWhereInput | BlockScalarWhereInput[]
   }
 
-  export type StoriesUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<StoriesCreateWithoutUserInput, StoriesUncheckedCreateWithoutUserInput>
-    connectOrCreate?: StoriesCreateOrConnectWithoutUserInput
-    upsert?: StoriesUpsertWithoutUserInput
-    disconnect?: StoriesWhereInput | boolean
-    delete?: StoriesWhereInput | boolean
-    connect?: StoriesWhereUniqueInput
-    update?: XOR<XOR<StoriesUpdateToOneWithWhereWithoutUserInput, StoriesUpdateWithoutUserInput>, StoriesUncheckedUpdateWithoutUserInput>
+  export type StoryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StoryCreateWithoutUserInput, StoryUncheckedCreateWithoutUserInput> | StoryCreateWithoutUserInput[] | StoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StoryCreateOrConnectWithoutUserInput | StoryCreateOrConnectWithoutUserInput[]
+    upsert?: StoryUpsertWithWhereUniqueWithoutUserInput | StoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StoryCreateManyUserInputEnvelope
+    set?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    disconnect?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    delete?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    connect?: StoryWhereUniqueInput | StoryWhereUniqueInput[]
+    update?: StoryUpdateWithWhereUniqueWithoutUserInput | StoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StoryUpdateManyWithWhereWithoutUserInput | StoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StoryScalarWhereInput | StoryScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -12217,22 +12246,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type StoriesCreateWithoutUserInput = {
+  export type StoryCreateWithoutUserInput = {
     createdAt?: Date | string
     expiresAt: Date | string
     img: string
   }
 
-  export type StoriesUncheckedCreateWithoutUserInput = {
+  export type StoryUncheckedCreateWithoutUserInput = {
     id?: number
     createdAt?: Date | string
     expiresAt: Date | string
     img: string
   }
 
-  export type StoriesCreateOrConnectWithoutUserInput = {
-    where: StoriesWhereUniqueInput
-    create: XOR<StoriesCreateWithoutUserInput, StoriesUncheckedCreateWithoutUserInput>
+  export type StoryCreateOrConnectWithoutUserInput = {
+    where: StoryWhereUniqueInput
+    create: XOR<StoryCreateWithoutUserInput, StoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type StoryCreateManyUserInputEnvelope = {
+    data: StoryCreateManyUserInput | StoryCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type PostUpsertWithWhereUniqueWithoutUserInput = {
@@ -12444,28 +12478,31 @@ export namespace Prisma {
     data: XOR<BlockUpdateManyMutationInput, BlockUncheckedUpdateManyWithoutBlockedInput>
   }
 
-  export type StoriesUpsertWithoutUserInput = {
-    update: XOR<StoriesUpdateWithoutUserInput, StoriesUncheckedUpdateWithoutUserInput>
-    create: XOR<StoriesCreateWithoutUserInput, StoriesUncheckedCreateWithoutUserInput>
-    where?: StoriesWhereInput
+  export type StoryUpsertWithWhereUniqueWithoutUserInput = {
+    where: StoryWhereUniqueInput
+    update: XOR<StoryUpdateWithoutUserInput, StoryUncheckedUpdateWithoutUserInput>
+    create: XOR<StoryCreateWithoutUserInput, StoryUncheckedCreateWithoutUserInput>
   }
 
-  export type StoriesUpdateToOneWithWhereWithoutUserInput = {
-    where?: StoriesWhereInput
-    data: XOR<StoriesUpdateWithoutUserInput, StoriesUncheckedUpdateWithoutUserInput>
+  export type StoryUpdateWithWhereUniqueWithoutUserInput = {
+    where: StoryWhereUniqueInput
+    data: XOR<StoryUpdateWithoutUserInput, StoryUncheckedUpdateWithoutUserInput>
   }
 
-  export type StoriesUpdateWithoutUserInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    img?: StringFieldUpdateOperationsInput | string
+  export type StoryUpdateManyWithWhereWithoutUserInput = {
+    where: StoryScalarWhereInput
+    data: XOR<StoryUpdateManyMutationInput, StoryUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type StoriesUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    img?: StringFieldUpdateOperationsInput | string
+  export type StoryScalarWhereInput = {
+    AND?: StoryScalarWhereInput | StoryScalarWhereInput[]
+    OR?: StoryScalarWhereInput[]
+    NOT?: StoryScalarWhereInput | StoryScalarWhereInput[]
+    id?: IntFilter<"Story"> | number
+    createdAt?: DateTimeFilter<"Story"> | Date | string
+    expiresAt?: DateTimeFilter<"Story"> | Date | string
+    userId?: StringFilter<"Story"> | string
+    img?: StringFilter<"Story"> | string
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -12484,15 +12521,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -12511,15 +12548,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -12604,15 +12641,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -12631,15 +12668,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LikeUpsertWithWhereUniqueWithoutPostInput = {
@@ -12690,15 +12727,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -12717,15 +12754,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -12807,15 +12844,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -12834,15 +12871,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutCommentsInput = {
@@ -12907,15 +12944,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLikesInput = {
@@ -12934,15 +12971,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLikesInput = {
@@ -13023,15 +13060,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesInput = {
@@ -13050,15 +13087,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutLikesInput = {
@@ -13135,15 +13172,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowersInput = {
@@ -13162,15 +13199,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowersInput = {
@@ -13194,15 +13231,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowingsInput = {
@@ -13221,15 +13258,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowingsInput = {
@@ -13264,15 +13301,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -13291,15 +13328,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutFollowingsInput = {
@@ -13329,15 +13366,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowingsInput = {
@@ -13356,15 +13393,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFollowRequestSentInput = {
@@ -13383,15 +13420,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowRequestSentInput = {
@@ -13410,15 +13447,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowRequestSentInput = {
@@ -13442,15 +13479,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowRequestReceivedInput = {
@@ -13469,15 +13506,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowRequestReceivedInput = {
@@ -13512,15 +13549,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowRequestSentInput = {
@@ -13539,15 +13576,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutFollowRequestReceivedInput = {
@@ -13577,15 +13614,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowRequestReceivedInput = {
@@ -13604,15 +13641,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBlockSentInput = {
@@ -13631,15 +13668,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlockSentInput = {
@@ -13658,15 +13695,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlockSentInput = {
@@ -13690,15 +13727,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
-    Stories?: StoriesCreateNestedOneWithoutUserInput
+    stories?: StoryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlockReceivedInput = {
@@ -13717,15 +13754,15 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
-    Stories?: StoriesUncheckedCreateNestedOneWithoutUserInput
+    stories?: StoryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlockReceivedInput = {
@@ -13760,15 +13797,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockSentInput = {
@@ -13787,15 +13824,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutBlockReceivedInput = {
@@ -13825,15 +13862,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
-    Stories?: StoriesUpdateOneWithoutUserNestedInput
+    stories?: StoryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlockReceivedInput = {
@@ -13852,15 +13889,15 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
-    Stories?: StoriesUncheckedUpdateOneWithoutUserNestedInput
+    stories?: StoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutStoriesInput = {
@@ -13879,13 +13916,13 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostCreateNestedManyWithoutUserInput
-    Likes?: LikeCreateNestedManyWithoutUserInput
-    Comments?: CommentCreateNestedManyWithoutUserInput
-    Followers?: FollowerCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    likes?: LikeCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowerCreateNestedManyWithoutFollowerInput
+    followings?: FollowerCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockCreateNestedManyWithoutBlockedInput
   }
@@ -13906,13 +13943,13 @@ export namespace Prisma {
     facebook?: string | null
     color?: string | null
     createdAt?: Date | string
-    Posts?: PostUncheckedCreateNestedManyWithoutUserInput
-    Likes?: LikeUncheckedCreateNestedManyWithoutUserInput
-    Comments?: CommentUncheckedCreateNestedManyWithoutUserInput
-    Followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
-    Followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
-    FollowRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
-    FollowRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    likes?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowerUncheckedCreateNestedManyWithoutFollowerInput
+    followings?: FollowerUncheckedCreateNestedManyWithoutFollowingInput
+    followRequestSent?: FollowerRequestUncheckedCreateNestedManyWithoutSenderInput
+    followRequestReceived?: FollowerRequestUncheckedCreateNestedManyWithoutReceiverInput
     BlockSent?: BlockUncheckedCreateNestedManyWithoutBlockerInput
     BlockReceived?: BlockUncheckedCreateNestedManyWithoutBlockedInput
   }
@@ -13949,13 +13986,13 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUpdateManyWithoutUserNestedInput
-    Likes?: LikeUpdateManyWithoutUserNestedInput
-    Comments?: CommentUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    likes?: LikeUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowerUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUpdateManyWithoutBlockedNestedInput
   }
@@ -13976,13 +14013,13 @@ export namespace Prisma {
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-    Likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
-    Comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
-    Followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
-    Followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
-    FollowRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
-    FollowRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowerUncheckedUpdateManyWithoutFollowerNestedInput
+    followings?: FollowerUncheckedUpdateManyWithoutFollowingNestedInput
+    followRequestSent?: FollowerRequestUncheckedUpdateManyWithoutSenderNestedInput
+    followRequestReceived?: FollowerRequestUncheckedUpdateManyWithoutReceiverNestedInput
     BlockSent?: BlockUncheckedUpdateManyWithoutBlockerNestedInput
     BlockReceived?: BlockUncheckedUpdateManyWithoutBlockedNestedInput
   }
@@ -14044,6 +14081,13 @@ export namespace Prisma {
     id?: number
     createdAt?: Date | string
     blockerId: string
+  }
+
+  export type StoryCreateManyUserInput = {
+    id?: number
+    createdAt?: Date | string
+    expiresAt: Date | string
+    img: string
   }
 
   export type PostUpdateWithoutUserInput = {
@@ -14220,6 +14264,26 @@ export namespace Prisma {
     blockerId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type StoryUpdateWithoutUserInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    img?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type StoryUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    img?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type StoryUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    img?: StringFieldUpdateOperationsInput | string
+  }
+
   export type LikeCreateManyPostInput = {
     id?: number
     createdAt?: Date | string
@@ -14353,9 +14417,9 @@ export namespace Prisma {
      */
     export type BlockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BlockDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use StoriesDefaultArgs instead
+     * @deprecated Use StoryDefaultArgs instead
      */
-    export type StoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StoriesDefaultArgs<ExtArgs>
+    export type StoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StoryDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

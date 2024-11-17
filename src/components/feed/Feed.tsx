@@ -8,7 +8,6 @@ const Feed = async ({ username }: { username?: string }) => {
 
   let posts: any[] = [];
 
-  // Fetch posts based on the username or fetch posts for the logged-in user and their following
   if (username) {
     posts = await prisma.post.findMany({
       where: {
@@ -71,7 +70,6 @@ const Feed = async ({ username }: { username?: string }) => {
       },
     });
   } else {
-  
     posts = await prisma.post.findMany({
       include: {
         user: true,

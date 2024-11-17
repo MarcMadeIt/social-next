@@ -2,7 +2,7 @@ import AddPost from "@/components/AddPost";
 import Feed from "@/components/feed/Feed";
 import MenuLeft from "@/components/menuLeft/MenuLeft";
 import MenuRight from "@/components/menuRight/MenuRight";
-import Stories from "@/components/Stories";
+import Stories from "@/components/story/Stories";
 
 const Homepage = () => {
   return (

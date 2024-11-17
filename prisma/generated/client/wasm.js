@@ -187,7 +187,7 @@ exports.Prisma.BlockScalarFieldEnum = {
   blockedId: 'blockedId'
 };
 
-exports.Prisma.StoriesScalarFieldEnum = {
+exports.Prisma.StoryScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   expiresAt: 'expiresAt',
@@ -214,7 +214,7 @@ exports.Prisma.ModelName = {
   Follower: 'Follower',
   FollowerRequest: 'FollowerRequest',
   Block: 'Block',
-  Stories: 'Stories'
+  Story: 'Story'
 };
 
 /**

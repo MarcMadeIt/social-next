@@ -17,7 +17,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
     include: {
       _count: {
         select: {
-          Followers: true,
+          followers: true,
         },
       },
     },
@@ -25,7 +25,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 
   if (!user) return notFound();
 
-  const authUser = auth();
+  const authUser = await auth();
   const currentUserId = authUser?.userId;
 
   let isBlocked = false;
@@ -129,7 +129,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
                     </span>
                   </div>
                   <span className="text-extra font-medium z-10">
-                    {user._count.Followers} PawPals
+                    {user._count.followers} PawPals
                   </span>
                 </div>
               </div>

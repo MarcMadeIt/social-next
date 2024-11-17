@@ -4,25 +4,34 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { FaPaperclip, FaPhotoFilm, FaRegFaceGrinBeam } from "react-icons/fa6";
 import SavedModal from "./SavedModal";
-import { useUser } from "@clerk/nextjs";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { CldUploadWidget } from "next-cloudinary";
 import AddPostButton from "./AddPostButton";
 import { addPost } from "@/lib/actions";
 
 const AddPost = () => {
-  const { user, isLoaded } = useUser();
+  const { user, isLoaded, isSignedIn } = useUser();
+  const { openSignIn } = useClerk();
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to track modal status
   const [desc, setDesc] = useState("");
   const [img, setImg] = useState<any>("");
+
+  const handleInteraction = () => {
+    if (!isSignedIn && !isModalOpen) {
+      setIsModalOpen(true); // Mark modal as open
+      openSignIn();
+    }
+  };
 
   if (!isLoaded) {
     return "Loading...";
   }
 
   return (
-    <div className="p-2 flex flex-col ">
-      {/*Top*/}
+    <div className="p-2 flex flex-col">
+      {/* Top */}
       <div className="flex items-center gap-2 w-full">
-        {/*ProfilePic*/}
+        {/* Profile Pic */}
         <div className="w-[15%] md:w-[10%] flex">
           <Image
             src={user?.imageUrl || "/noavatar.png"}
@@ -34,13 +43,14 @@ const AddPost = () => {
         </div>
         <form
           action={(formData) => addPost(formData, img?.secure_url || "")}
-          className="w-full p-3 flex items-center justify-between gap-1 bg-foreground rounded-lg relative "
+          className="w-full p-3 flex items-center justify-between gap-1 bg-foreground rounded-lg relative"
         >
           <textarea
             placeholder="What do you have on mind?"
-            className="outline-none bg-transparent p-1 resize-none w-[50%] placeholder-placeholder"
+            className="outline-none bg-transparent p-1 resize-none w-[50%] placeholder-placeholder text14 md:text-lg"
             name="desc"
-            // onChange={(e) => setDesc(e.target.value)}
+            onFocus={handleInteraction} // Trigger sign-in modal on focus
+            onChange={(e) => setDesc(e.target.value)}
           />
           {img && (
             <div className="bg-foreground rounded-lg flex flex-col gap-2 items-center">
@@ -52,7 +62,7 @@ const AddPost = () => {
                   fill
                 />
               </div>
-              <span className=" text-secondary text11">
+              <span className="text-secondary text11">
                 {img.original_filename}.{img.format}
               </span>
             </div>
@@ -61,15 +71,16 @@ const AddPost = () => {
             <FaRegFaceGrinBeam
               className="text-extra cursor-pointer"
               size={20}
+              onClick={handleInteraction} // Trigger sign-in modal on click
             />
             <AddPostButton />
           </div>
         </form>
       </div>
-      {/*Bottom*/}
+      {/* Bottom */}
       <div className="flex">
         <div className="w-[15%] md:w-[10%]"></div>
-        {/*Upload files*/}
+        {/* Upload Files */}
         <div className="flex items-center text-primary w-[100%] md:w-[90%] gap-2 py-2">
           <CldUploadWidget
             uploadPreset="social-next"
@@ -80,24 +91,18 @@ const AddPost = () => {
           >
             {({ open }) => (
               <div
-                className="flex flex-col gap-4 relative items-start cursor-pointer "
-                onClick={() => open()}
+                className="flex flex-col gap-4 relative items-start cursor-pointer"
+                onClick={() => {
+                  handleInteraction();
+                  if (isSignedIn) open();
+                }}
               >
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 hover:text-secondary duration-300 transition-colors">
                   <FaPhotoFilm />
-                  <span className="text12">Photo/Video</span>
+                  <span className="text12 hover:text-secondary duration-300 transition-colors">
+                    Photo/Video
+                  </span>
                 </div>
-
-                {/* {state.success && (
-                      <span className="text-primary absolute bottom-0 right-0">
-                        Cover has been updated!
-                      </span>
-                    )}
-                    {state.error && (
-                      <span className="text-red-700">
-                        Something went wrong!
-                      </span>
-                    )} */}
               </div>
             )}
           </CldUploadWidget>
@@ -106,7 +111,8 @@ const AddPost = () => {
             <input type="file" id="file" className="text-[11px]" hidden />
             <label
               htmlFor="file"
-              className="flex items-center gap-1 cursor-pointer label-post p-2"
+              className="flex items-center gap-1 cursor-pointer label-post p-2 hover:text-secondary duration-300 transition-colors"
+              onClick={handleInteraction}
             >
               <FaPaperclip />
               <span className="text12">Document</span>

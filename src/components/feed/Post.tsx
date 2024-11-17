@@ -3,6 +3,7 @@ import Comments from "./Comments";
 import PostInteraction from "./PostInteraction";
 import { Post as PostType, User } from "../../../prisma/generated/client";
 import PostActions from "./PostActions";
+import Link from "next/link";
 
 type FeedPostType = PostType & { user: User } & {
   likes: [{ userId: string }];
@@ -31,8 +32,10 @@ const Post = ({
             />
           </div>
           <p className="text13 text-extra py-1 px-2 bg-user rounded-md font-semibold cursor-pointer">
-            <span className="text-lg leading-3">@</span>
-            {post.user.username}
+            <Link href={`/profile/${post.user.username}`}>
+              <span className="text-lg leading-3">@</span>
+              {post.user.username}
+            </Link>
           </p>
           <span className="font-medium text13 md:text-base">
             {post.user.firstname || ""}
@@ -63,13 +66,9 @@ const Post = ({
         postId={post.id}
         likes={post.likes ? post.likes.map((like) => like.userId) : []}
         commentNumber={post._count.comments}
-        isAuthenticated={isAuthenticated} // Passing isAuthenticated to handle the visibility of actions
+        isAuthenticated={isAuthenticated}
       />
-      {isAuthenticated ? (
-        <Comments postId={post.id} />
-      ) : (
-        <p className="text-text text-sm">Log in to comment.</p>
-      )}
+      {isAuthenticated && <Comments postId={post.id} />}
     </div>
   );
 };
