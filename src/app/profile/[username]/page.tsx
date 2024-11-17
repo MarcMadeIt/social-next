@@ -10,8 +10,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
 
-const ProfilePage = async ({ params }: { params: { username: string } }) => {
+type ProfilePageParams = {
+  username: string;
+};
+
+const ProfilePage = async ({ params }: { params: ProfilePageParams }) => {
   const { username } = params;
+
   const user = await prisma.user.findFirst({
     where: { username },
     include: {
