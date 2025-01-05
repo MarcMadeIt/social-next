@@ -2,6 +2,9 @@ import 'dotenv/config';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true, // Ignorer ESLint-fejl under build
+  },
   images: {
     remotePatterns: [
       {

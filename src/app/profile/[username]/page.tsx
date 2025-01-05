@@ -10,12 +10,14 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
 
-type ProfilePageParams = {
-  username: string;
-};
+interface PageProps {
+  params: Promise<{
+    username: string;
+  }>;
+}
 
-const ProfilePage = async ({ params }: { params: ProfilePageParams }) => {
-  const { username } = params;
+const ProfilePage = async ({ params }: PageProps) => {
+  const { username } = await params;
 
   const user = await prisma.user.findFirst({
     where: { username },
@@ -105,6 +107,7 @@ const ProfilePage = async ({ params }: { params: ProfilePageParams }) => {
               <div className="flex flex-col justify-center items-center mt-10 gap-4 h-[40%]">
                 <span className="flex flex-col justify-center items-center text-primary text-xl font-semibold">
                   {user.firstname}
+                  {username}
                 </span>
                 <div className="cursor-pointer flex items-center">
                   <div className="flex items-center translate-x-4">
