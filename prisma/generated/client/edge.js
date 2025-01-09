@@ -7,7 +7,6 @@ const {
   PrismaClientRustPanicError,
   PrismaClientInitializationError,
   PrismaClientValidationError,
-  NotFoundError,
   getPrismaClient,
   sqltag,
   empty,
@@ -32,11 +31,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.22.0
+ * Prisma Client JS version: 6.2.0
  * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
  */
 Prisma.prismaVersion = {
-  client: "5.22.0",
+  client: "6.2.0",
   engine: "605197351a3c8bdd595af2d2a9bc3025bca48ea2"
 }
 
@@ -45,7 +44,6 @@ Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError
 Prisma.PrismaClientRustPanicError = PrismaClientRustPanicError
 Prisma.PrismaClientInitializationError = PrismaClientInitializationError
 Prisma.PrismaClientValidationError = PrismaClientValidationError
-Prisma.NotFoundError = NotFoundError
 Prisma.Decimal = Decimal
 
 /**
@@ -217,12 +215,13 @@ const config = {
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "5.22.0",
+  "clientVersion": "6.2.0",
   "engineVersion": "605197351a3c8bdd595af2d2a9bc3025bca48ea2",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {

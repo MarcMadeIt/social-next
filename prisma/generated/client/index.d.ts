@@ -56,7 +56,7 @@ export type Story = $Result.DefaultSelection<Prisma.$StoryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
- * 
+ *
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
@@ -65,7 +65,7 @@ export type Story = $Result.DefaultSelection<Prisma.$StoryPayload>
  * const users = await prisma.user.findMany()
  * ```
  *
- * 
+ *
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
  */
 export class PrismaClient<
@@ -77,7 +77,7 @@ export class PrismaClient<
 
     /**
    * ##  Prisma Client ʲˢ
-   * 
+   *
    * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
@@ -86,7 +86,7 @@ export class PrismaClient<
    * const users = await prisma.user.findMany()
    * ```
    *
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
@@ -116,7 +116,7 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
   $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
@@ -128,7 +128,7 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
   $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
@@ -139,7 +139,7 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
   $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
@@ -151,7 +151,7 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
   $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
@@ -276,7 +276,6 @@ export namespace Prisma {
   export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
   export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
   export import PrismaClientValidationError = runtime.PrismaClientValidationError
-  export import NotFoundError = runtime.NotFoundError
 
   /**
    * Re-export of sql-template-tag
@@ -315,7 +314,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.22.0
+   * Prisma Client JS version: 6.2.0
    * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
    */
   export type PrismaVersion = {
@@ -1361,6 +1360,7 @@ export namespace Prisma {
     | 'createManyAndReturn'
     | 'update'
     | 'updateMany'
+    | 'updateManyAndReturn'
     | 'upsert'
     | 'delete'
     | 'deleteMany'
@@ -1853,6 +1853,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["user"]>
 
 
+
   export type UserSelectScalar = {
     id?: boolean
     username?: boolean
@@ -1921,7 +1922,7 @@ export namespace Prisma {
 
   type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<UserFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: UserCountAggregateInputType | true
     }
@@ -1942,7 +1943,7 @@ export namespace Prisma {
     findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one User that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one User that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
      * @example
@@ -3035,6 +3036,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["post"]>
 
 
+
   export type PostSelectScalar = {
     id?: boolean
     desc?: boolean
@@ -3071,7 +3073,7 @@ export namespace Prisma {
 
   type PostGetPayload<S extends boolean | null | undefined | PostDefaultArgs> = $Result.GetResult<Prisma.$PostPayload, S>
 
-  type PostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type PostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<PostFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: PostCountAggregateInputType | true
     }
@@ -3092,7 +3094,7 @@ export namespace Prisma {
     findUnique<T extends PostFindUniqueArgs>(args: SelectSubset<T, PostFindUniqueArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Post that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Post that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {PostFindUniqueOrThrowArgs} args - Arguments to find a Post
      * @example
@@ -4013,6 +4015,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["comment"]>
 
 
+
   export type CommentSelectScalar = {
     id?: boolean
     desc?: boolean
@@ -4049,7 +4052,7 @@ export namespace Prisma {
 
   type CommentGetPayload<S extends boolean | null | undefined | CommentDefaultArgs> = $Result.GetResult<Prisma.$CommentPayload, S>
 
-  type CommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type CommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<CommentFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: CommentCountAggregateInputType | true
     }
@@ -4070,7 +4073,7 @@ export namespace Prisma {
     findUnique<T extends CommentFindUniqueArgs>(args: SelectSubset<T, CommentFindUniqueArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Comment that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Comment that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {CommentFindUniqueOrThrowArgs} args - Arguments to find a Comment
      * @example
@@ -4966,6 +4969,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["like"]>
 
 
+
   export type LikeSelectScalar = {
     id?: boolean
     createdAt?: boolean
@@ -4999,7 +5003,7 @@ export namespace Prisma {
 
   type LikeGetPayload<S extends boolean | null | undefined | LikeDefaultArgs> = $Result.GetResult<Prisma.$LikePayload, S>
 
-  type LikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type LikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<LikeFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: LikeCountAggregateInputType | true
     }
@@ -5020,7 +5024,7 @@ export namespace Prisma {
     findUnique<T extends LikeFindUniqueArgs>(args: SelectSubset<T, LikeFindUniqueArgs<ExtArgs>>): Prisma__LikeClient<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Like that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Like that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {LikeFindUniqueOrThrowArgs} args - Arguments to find a Like
      * @example
@@ -5908,6 +5912,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["follower"]>
 
 
+
   export type FollowerSelectScalar = {
     id?: boolean
     createdAt?: boolean
@@ -5937,7 +5942,7 @@ export namespace Prisma {
 
   type FollowerGetPayload<S extends boolean | null | undefined | FollowerDefaultArgs> = $Result.GetResult<Prisma.$FollowerPayload, S>
 
-  type FollowerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type FollowerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<FollowerFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: FollowerCountAggregateInputType | true
     }
@@ -5958,7 +5963,7 @@ export namespace Prisma {
     findUnique<T extends FollowerFindUniqueArgs>(args: SelectSubset<T, FollowerFindUniqueArgs<ExtArgs>>): Prisma__FollowerClient<$Result.GetResult<Prisma.$FollowerPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Follower that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Follower that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {FollowerFindUniqueOrThrowArgs} args - Arguments to find a Follower
      * @example
@@ -6814,6 +6819,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["followerRequest"]>
 
 
+
   export type FollowerRequestSelectScalar = {
     id?: boolean
     createdAt?: boolean
@@ -6843,7 +6849,7 @@ export namespace Prisma {
 
   type FollowerRequestGetPayload<S extends boolean | null | undefined | FollowerRequestDefaultArgs> = $Result.GetResult<Prisma.$FollowerRequestPayload, S>
 
-  type FollowerRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type FollowerRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<FollowerRequestFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: FollowerRequestCountAggregateInputType | true
     }
@@ -6864,7 +6870,7 @@ export namespace Prisma {
     findUnique<T extends FollowerRequestFindUniqueArgs>(args: SelectSubset<T, FollowerRequestFindUniqueArgs<ExtArgs>>): Prisma__FollowerRequestClient<$Result.GetResult<Prisma.$FollowerRequestPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one FollowerRequest that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one FollowerRequest that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {FollowerRequestFindUniqueOrThrowArgs} args - Arguments to find a FollowerRequest
      * @example
@@ -7720,6 +7726,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["block"]>
 
 
+
   export type BlockSelectScalar = {
     id?: boolean
     createdAt?: boolean
@@ -7749,7 +7756,7 @@ export namespace Prisma {
 
   type BlockGetPayload<S extends boolean | null | undefined | BlockDefaultArgs> = $Result.GetResult<Prisma.$BlockPayload, S>
 
-  type BlockCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type BlockCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<BlockFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: BlockCountAggregateInputType | true
     }
@@ -7770,7 +7777,7 @@ export namespace Prisma {
     findUnique<T extends BlockFindUniqueArgs>(args: SelectSubset<T, BlockFindUniqueArgs<ExtArgs>>): Prisma__BlockClient<$Result.GetResult<Prisma.$BlockPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Block that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Block that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {BlockFindUniqueOrThrowArgs} args - Arguments to find a Block
      * @example
@@ -8633,6 +8640,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["story"]>
 
 
+
   export type StorySelectScalar = {
     id?: boolean
     createdAt?: boolean
@@ -8662,7 +8670,7 @@ export namespace Prisma {
 
   type StoryGetPayload<S extends boolean | null | undefined | StoryDefaultArgs> = $Result.GetResult<Prisma.$StoryPayload, S>
 
-  type StoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+  type StoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
     Omit<StoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: StoryCountAggregateInputType | true
     }
@@ -8683,7 +8691,7 @@ export namespace Prisma {
     findUnique<T extends StoryFindUniqueArgs>(args: SelectSubset<T, StoryFindUniqueArgs<ExtArgs>>): Prisma__StoryClient<$Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Story that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Story that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
      * @param {StoryFindUniqueOrThrowArgs} args - Arguments to find a Story
      * @example
@@ -14372,54 +14380,6 @@ export namespace Prisma {
   }
 
 
-
-  /**
-   * Aliases for legacy arg types
-   */
-    /**
-     * @deprecated Use UserCountOutputTypeDefaultArgs instead
-     */
-    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PostCountOutputTypeDefaultArgs instead
-     */
-    export type PostCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PostCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CommentCountOutputTypeDefaultArgs instead
-     */
-    export type CommentCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CommentCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use UserDefaultArgs instead
-     */
-    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PostDefaultArgs instead
-     */
-    export type PostArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PostDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CommentDefaultArgs instead
-     */
-    export type CommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CommentDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use LikeDefaultArgs instead
-     */
-    export type LikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LikeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use FollowerDefaultArgs instead
-     */
-    export type FollowerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FollowerDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use FollowerRequestDefaultArgs instead
-     */
-    export type FollowerRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FollowerRequestDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use BlockDefaultArgs instead
-     */
-    export type BlockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BlockDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use StoryDefaultArgs instead
-     */
-    export type StoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StoryDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
